@@ -1,0 +1,9 @@
+body {
+    background-color: rgb(168, 245, 243);
+}
+
+h1 {
+    text-decoration: underline;
+    text-align: center;
+    color: rgb(9, 8, 74);
+}
