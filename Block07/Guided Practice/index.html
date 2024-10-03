@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playing With JavaScript</title>
+    <script src="code.js"></script>
+    <style>
+      h1 {
+        color: coral;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 style="text-align: center">Playing with JavaScript</h1>
+
+    <!-- Inline JavaScript w/ inline CSS-->
+
+    <div class="form-group" style="text-align: center">
+      <button class="float-center-btn" type="button" onclick="displayAlert()">
+        Press for a Greeting
+      </button>
+    </div>
+
+    <script type="text/javascript">
+      function displayAlert() {
+        let str1 = "Hello";
+        let str2 = "I am";
+        let name = "Laigha";
+
+        alert(str1 + " " + str2 + " " + name);
+      }
+    </script>
+  </body>
+</html>
