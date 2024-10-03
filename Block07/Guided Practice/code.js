@@ -41,4 +41,4 @@ let num = 2 + 4
 console.log (num)
 
 // Concatenate three strings: Hello + space + World
-alert ("Hello" + " " + "World!")
+// alert ("Hello" + " " + "World!")
