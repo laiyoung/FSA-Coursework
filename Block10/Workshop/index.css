@@ -1,11 +1,13 @@
-/* Top and Bottom boxes */
-.box1 {
-  display: flex;
-  background-color: #cfc;
-  padding: 10px;
-  border: 2px solid green;
+.header {
+  background-color: bisque;
+  padding: 1vw;
 }
-.container { 
-    flex-flow: row wrap;  
-      
+h1 {
+  text-align: center;
+  color: coral;
+}
+.footer {
+  background-color: bisque;
+  text-align: center;
+  padding: 1vw;
 }
