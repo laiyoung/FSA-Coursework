@@ -6,11 +6,14 @@ h1 {
   text-align: center;
   color: coral;
 }
+body {
+  background-color: azure;
+}
+h3 {
+  color: rgb(121, 38, 8);
+}
 .footer {
   background-color: bisque;
   text-align: center;
   padding: 1vw;
-}
-body {
-        background-color: azure;
 }
