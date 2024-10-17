@@ -16,6 +16,7 @@ body {
   grid-auto-rows: 20em;
   margin: 2em;
   gap: 2vw;
+  z-index: 1;
 }
 .item-a1P {
   color: brown;
@@ -23,9 +24,11 @@ body {
 }
 .item-b1P {
   background-color: rgb(48, 209, 221);
+  align-content: end;
 }
 .item-c1P {
   background-color: cornflowerblue;
+  place-content: space-around;
 }
 
 .container2P {
@@ -39,6 +42,61 @@ body {
 }
 .item-b2P {
   background-color: darkblue;
+}
+.square {
+  width: 100px;
+  height: 100px;
+  background: red;
+}
+.circle1 {
+  width: 100px;
+  height: 100px;
+  background: red;
+  border-radius: 50%;
+}
+.circle2 {
+  width: 100px;
+  height: 100px;
+  background: rgb(151, 199, 238);
+  border-radius: 50%;
+}
+.circle3 {
+  width: 100px;
+  height: 100px;
+  background: rgb(151, 199, 238);
+  border-radius: 50%;
+  z-index: -2;
+}
+.circle4 {
+  width: 100px;
+  height: 100px;
+  background: rgb(151, 199, 238);
+  border-radius: 50%;
+  float: right;
+}
+.circle5 {
+  width: 100px;
+  height: 100px;
+  background: rgb(151, 199, 238);
+  border-radius: 50%;
+  float: center;
+}
+.triangle-down1 {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 100px solid red;
+  left: 350px;
+  z-index: -2;
+}
+.triangle-down2 {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 100px solid red;
+  float: right;
 }
 
 h3 {
