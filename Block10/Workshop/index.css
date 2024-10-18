@@ -114,6 +114,7 @@ h3 {
   }
 }
 
+/* Just wanted to test and see if I had this set properly. I think it did! */
 @media (max-width: 800px) {
   body {
     background-color: rgb(189, 221, 189);
