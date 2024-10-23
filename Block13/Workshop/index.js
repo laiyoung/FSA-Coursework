@@ -40,6 +40,8 @@ function getRandomInt(limit) {
  * then alerts the user with a descriptive message.
  * @param {number} f temperature in °F
  */
+
+
 function parseFahrenheit(f) {
   const c = convertToCelsius(f);
   const description = describeTemperature(f);
