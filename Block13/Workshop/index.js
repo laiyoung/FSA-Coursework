@@ -24,18 +24,18 @@ function convertToCelsius(f) {
  */
 function describeTemperature(f) {
   if (f < 32) {
-    message = "That is very cold!";
+    message = "very cold";
   } else if (f < 64) {
-    message = "That is cold!";
+    message = "cold";
   } else if (f < 86) {
-    message = "That is warm!";
+    message = "warm";
   } else if (f < 100) {
-    message = "That is hot!";
+    message = "hot";
   } else if (f >= 100) {
-    message = "That is very hot!";
+    message = "very hot";
   }
 
-  console.log(message);
+  console.log(`That is` + " " + message + `!`);
 }
 
 /**
