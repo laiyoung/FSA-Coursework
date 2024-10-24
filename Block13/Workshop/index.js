@@ -6,7 +6,7 @@
  * @returns {number} temperature in °C
  */
 function convertToCelsius(f) {
-  // TODO
+  return Math.round(((f - 32) * 5) / 9);
 }
 
 /**
@@ -23,7 +23,19 @@ function convertToCelsius(f) {
  * the given Fahrenheit temperature `f`
  */
 function describeTemperature(f) {
-  // TODO
+  if (f < 32) {
+    message = "That is very cold!";
+  } else if (f < 64) {
+    message = "That is cold!";
+  } else if (f < 86) {
+    message = "That is warm!";
+  } else if (f < 100) {
+    message = "That is hot!";
+  } else if (f >= 100) {
+    message = "That is very hot!";
+  }
+
+  console.log(message);
 }
 
 /**
@@ -31,7 +43,7 @@ function describeTemperature(f) {
  * @returns {number} a random integer in the range [0, `limit`)
  */
 function getRandomInt(limit) {
-  // TODO
+  return Math.round(Math.random(f) * limit);
 }
 
 // -------------------- DO NOT CHANGE THE CODE BELOW ---------------------- //
@@ -40,7 +52,6 @@ function getRandomInt(limit) {
  * then alerts the user with a descriptive message.
  * @param {number} f temperature in °F
  */
-
 
 function parseFahrenheit(f) {
   const c = convertToCelsius(f);
