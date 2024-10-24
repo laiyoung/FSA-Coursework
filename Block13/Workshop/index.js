@@ -37,9 +37,6 @@ function describeTemperature(f) {
     message = "very hot";
   }
   return message;
-
-  // let output = message;
-  // console.log(`That is ${output}!`);
 }
 
 /**
@@ -62,6 +59,7 @@ function parseFahrenheit(f) {
   const description = describeTemperature(f);
   const message = `${f}°F is ${c}°C. That is ${description}.`;
   alert(message);
+  console.log(`That is ${message}!`);
 }
 
 const fahrenheitPrompt =
