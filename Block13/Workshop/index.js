@@ -23,6 +23,8 @@ function convertToCelsius(f) {
  * the given Fahrenheit temperature `f`
  */
 function describeTemperature(f) {
+  let message = " ";
+
   if (f < 32) {
     message = "very cold";
   } else if (f < 64) {
@@ -34,8 +36,10 @@ function describeTemperature(f) {
   } else if (f >= 100) {
     message = "very hot";
   }
+  return message;
 
-  console.log(`That is` + " " + message + `!`);
+  // let output = message;
+  // console.log(`That is ${output}!`);
 }
 
 /**
