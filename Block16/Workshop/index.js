@@ -99,7 +99,8 @@ function getItemsByCategory(items, category) {
  */
 function countItems(items) {
   /** Making a new array called reducedCountArray and using the reduce method to
-   * cycle through and add the quantity of each item
+   * cycle through and add the quantity of each item and get the total number of
+   * items in stock
    */
   const reducedCountArray = items.reduce(
     (accumulator, currentValue) => accumulator + currentValue.quantity,
@@ -115,6 +116,7 @@ function countItems(items) {
 function calculateTotalPrice(items) {
   /** Making a new array called reducedPriceArray and using the reduce method to
    * cycle through and multiply the quantity of each item by the associated price
+   * to get the total cost of all goods in stock
    */
   const reducedPriceArray = items.reduce(
     (accumulator, currentValue) =>
