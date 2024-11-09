@@ -69,12 +69,12 @@ function getItemById(items, id) {
  * recommended by our TA
  */
 function getItemPriceByName(items, name) {
-  /** Making a new array called filterArray and using the filter method to 
+  /** Making a new array called filterName and using the filter method to
    * filter for the item name requested
    */
-  const filterArray = items.filter((item) => item.name === name);
-  // Grabbing the associated price from the produced array
-  return filterArray[0].price;
+  const filterName = items.filter((item) => item.name === name);
+  // Grabbing the associated price from the produced array, with only 1 index
+  return filterName[0].price;
 }
 
 /**
@@ -83,7 +83,13 @@ function getItemPriceByName(items, name) {
  * @returns {Item[]} array of items that belong to the given `category`
  */
 function getItemsByCategory(items, category) {
+  /** Making a new array called filterCategory and using the filter method to
+   * filter for the item category requested
+   */
   const filterCategory = items.filter((item) => item.category === category);
+  /** Using a forEach method to grab the associated name for each indexed item
+   * and logging the results
+  */
   filterCategory.forEach((item) => console.log(item.name));
 }
 
@@ -92,6 +98,9 @@ function getItemsByCategory(items, category) {
  * @returns {number} the total quantity of all items
  */
 function countItems(items) {
+  /** Making a new array called reducedCountArray and using the reduce method to
+   * cycle through and add the quantity of each item
+   */
   const reducedCountArray = items.reduce(
     (accumulator, currentValue) => accumulator + currentValue.quantity,
     0
@@ -104,7 +113,9 @@ function countItems(items) {
  * @returns {number} the cost of all given items
  */
 function calculateTotalPrice(items) {
-  //  quantity*price
+  /** Making a new array called reducedPriceArray and using the reduce method to
+   * cycle through and multiply the quantity of each item by the associated price
+   */
   const reducedPriceArray = items.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue.price * currentValue.quantity,
