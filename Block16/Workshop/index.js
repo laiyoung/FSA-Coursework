@@ -15,9 +15,19 @@
  */
 
 function logNames(items) {
-  // Making console table of the item names
-  items.forEach((items) => console.table(items.name));
+  /** Using a slice to
+   * copy the item properties and a forEach to cycle through and grab the
+   * item names
+   */
+
+  items.slice(0).forEach((item) => {
+    // Making console table of the item names
+    console.table(item.name);
+  });
 }
+/** Another function that works:
+ * items.forEach((items) => console.table(items.name));
+ */
 
 /**
  * @param {Item[]} items - array of items
@@ -26,6 +36,9 @@ function logNames(items) {
 function getUppercaseNames(items) {
   // Establish a new array called mappedArray
   const mappedArray = items.map((item) => {
+    /** Adding item names to the new array, with a upperCase method to
+     * turn names into all caps
+     */
     return item.name.toUpperCase();
   });
   // Logging the new array
@@ -38,9 +51,12 @@ function getUppercaseNames(items) {
  * @returns {Item} - the item in `items` with the given `id`
  */
 function getItemById(items, id) {
+  // Establishing a new object foundItem
   const foundItem = items.find((item) => {
+    // Finding item id, by using a strict equality operator
     return item.id === id;
   });
+  // Logging the new object
   console.log(foundItem);
 }
 
@@ -49,9 +65,15 @@ function getItemById(items, id) {
  * @param {string} name - name of the item to find
  * @returns {number} the price of the item named `name`
  */
-// A loop function was requested here, but that appraoch was not recommended by our TA
+/** A loop function was requested here, but that appraoch was not
+ * recommended by our TA
+ */
 function getItemPriceByName(items, name) {
+  /** Making a new array called filterArray and using the filter method to 
+   * filter for the item name requested
+   */
   const filterArray = items.filter((item) => item.name === name);
+  // Grabbing the associated price from the produced array
   return filterArray[0].price;
 }
 
@@ -75,7 +97,6 @@ function countItems(items) {
     0
   );
   return reducedCountArray;
-  
 }
 
 /**
