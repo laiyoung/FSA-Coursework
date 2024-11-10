@@ -1,4 +1,4 @@
-// Prompt:
+// Froyo Shop Prompt:
 let userFlavors = prompt("Enter your order");
 if (userFlavors) {
 }
@@ -21,13 +21,27 @@ const flavorMap = {};
 
 const freqMap = {};
 
-// A frequency for loop
+/** A for loop to keep track of the flavors by moving through the flavorsArray.
+ * The for loop starts at index 0 and goes through the array length, adding 1 item
+ * each time.
+ */
 for (let i = 0; i < flavorsArray.length; i++) {
+  /** Defining the current index in the flavorsArray as a variable for use
+   * inside the conditional statement
+   */
   const current = flavorsArray[i];
+  // The conditional finds out if the current index "does not exist"
   if (!freqMap[current]) {
     freqMap[current] = 1;
+    /** Adding the index to the frequency map object as a property, only if that 
+     * flavor isn't already present, and assigning it a value of 1
+     */
   } else {
     freqMap[current] += 1;
+    /** Adding 1 to the value of a flavor property in the frequency map object,
+     * if that flavor already exists
+     */
   }
 }
+// Logging the frequency map object of properties and values
 console.log(freqMap);
