@@ -45,6 +45,7 @@ function getUppercaseNames(items) {
   console.log(mappedArray);
 }
 
+
 /**
  * @param {Item[]} items - array of items
  * @param {number} id - id of the item to find
@@ -89,7 +90,7 @@ function getItemsByCategory(items, category) {
   const filterCategory = items.filter((item) => item.category === category);
   /** Using a forEach method to grab the associated name for each indexed item
    * and logging the results
-  */
+   */
   filterCategory.forEach((item) => console.log(item.name));
 }
 
