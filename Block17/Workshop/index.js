@@ -41,18 +41,47 @@ class Numbers {
   }
   sum() {
     //return the sum of the numbers
+    const reducedSumArray = this.data.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    return reducedSumArray;
   }
   product() {
     //return the product of the numbers
+    const reducedProductArray = this.data.reduce(
+      (accumulator, currentValue) => accumulator * currentValue,
+      1
+    );
+    return reducedProductArray;
   }
+  /** So, because we're doing multiplication instead of addition, and you're
+   * multiplying by the accumulator[not 2 #s being multiplied and the accumulator
+   * just keeping track of the outcome --> acc + (a*b)], you can't start
+   * your intial value at 0, you'll just return zero, you have to start it at 1
+   */
   greaterThan(target) {
     //return the numbers greater than the target
+
+    const greaterThanArray = [];
+    this.data.forEach((number) => {
+      if (number > target) {
+        greaterThanArray.push(number);
+      }
+    });
+    console.log(greaterThanArray);
   }
   howMany(target) {
     //return the count of a given number
+    let count = 0;
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i] === target) {
+        count++;
+      }
+    }
+    return count;
   }
 }
-
 //Prompt the user for a list of integers separated by commas
 const str = prompt("enter some numbers, like this", "1,2,3,3,5,9");
 

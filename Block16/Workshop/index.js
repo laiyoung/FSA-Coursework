@@ -121,7 +121,7 @@ function calculateTotalPrice(items) {
    */
   const reducedPriceArray = items.reduce(
     (accumulator, currentValue) =>
-      accumulator + currentValue.price * currentValue.quantity,
+      accumulator + (currentValue.price * currentValue.quantity),
     0
   );
   return reducedPriceArray;
