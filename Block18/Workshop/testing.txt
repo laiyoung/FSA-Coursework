@@ -1,0 +1,125 @@
+Unit Testing:
+
+1. A function called "multiplication" 
+that returns the product of the two input numbers:
+-Specifications/Pseudocode:
+  Action = multiplication
+  Parameters/arguements/inputs = 2 numbers (x,y)
+  Return/output = product
+  Product = number (x*y)
+
+-Happy Path Expectations:
+  Expect function to be a multiplication of 2 numbers 
+  Expect the acceptance of arguements/parameters/inputs to be 2 numbers
+  Expect the result of multiplication to be a return of a single number
+  Expect the return to be the product of the 2 provided inputs
+  Expect the return to be an error, if arguements are not 2 numbers 
+
+-Unhappy Path Expectations:
+  User inputs strings, instead of numbers (unexpected data type)
+  Only 1 arguement/number is provided
+  No arguements/numbers are provided
+  More than 2 arguements/numbers are provided
+
+
+2. A function called "concatOdds" takes two arrays of integers as 
+arguments. It should return a single array that only contains the 
+odd numbers, in ascending order, from both of the arrays:
+-Specifications/Pseudocode:
+  Action = concatenation (function = "concatOdds")
+  Parameters/arguements/inputs = 2 arrays
+  Return/output = concatenation of 2 array inputs
+  Concatenation = combine the odd numbers from both arrays, organized in
+  ascending order
+
+
+-Happy Path Expectations: 
+  Expect input/arguements to be 2 arrays of integers
+  Expect concatenation to be 1 array 
+  Expect output to be an array of only integers
+  Expect the resulting concatenation to be inclusive of only values featured 
+   in the original 2 arrays
+  Expect the concatenation function to be able to recognize multiples and log 
+   repeated values only once (using a conditional statement)
+  Expect the 1 resulting array to be only inclusive of odd numbers
+  Expect the 1 resulting array to be in ascending order
+  Expect the return to be an error, if arguements are not 2 arrays of integers 
+
+
+
+-Unhappy Path Expectations:
+ User includes other number types besides integers within the 2 original arrays
+ User includes other data types (like strings) within the 2 original arrays
+ User only inputs a single array
+ User inputs 2 arrays of integers that include no odd integers
+
+
+
+Functional Testing: 
+
+1. A shopping cart checkout feature that allows a user to check out as a guest 
+(without an account), or as a logged-in user. They should be allowed to do 
+either, but should be asked if they want to create an account or log in if 
+they check out as a guest.
+-Specifications/Design Parameters:
+  Users have the option to log into an account
+  The user's account holds information that requires secure storage:
+   Name
+   Email
+   Address/Addresses
+   Phone Number
+   Card/Payment Information
+   Previous Orders
+  The shopping cart should store items chosen by the user and the number of 
+   each item requested
+  The shopping cart should keep track of the price of each item, as well as
+   the running total
+  The user can access a shopping cart page that shows all item(s) selected, the
+   quantity of the item(s) selected, as well as the total cost of the item(s) in 
+   the cart
+  The user should be able to remove items from the cart or change the quantity a 
+   of items 
+  If the user is logged into their account, their default information is 
+   automatically entered as they navigate to the checkout page
+  Users should  have the ability to change any of this automatically loaded 
+   information
+  The user has the option to input discounts that subtract from the running total
+  Shipping cost is calculated once the user's shipping address is entered and
+  shipping cost is added to the running total
+ Options/Inputs for checkout include:
+  Name
+  Email
+  Billing address
+  Shipping address
+  Phone Number
+  Gift card/Discount
+ Users should have a review page, to allow for making any final changes to included 
+   information
+ User should recieve an email after their order is submitted that includes:
+   Order Number/Reference Number for their order
+   A summary of items purchased and total cost
+   Payment summary
+   Shipping address and information about estimated shipping and order prep
+ This email should include a link to allow for making any final changes to included 
+   information (viable for a set number of hours, if link is opened post this 
+   set time, the user is referred to customer service contacts)
+ If a user is checking out as a guest, they are offered the opportunity to sign
+   up for an account after cheking out
+ The post-order sign up prompt should include the information the user entered 
+   during their guest checkout (to speed up the sign up process)
+
+-Happy Path Expectations: 
+ The user should be able to add AND remove items from their cart
+ The user should be able to see the running total of the cart
+ The user should be able to checkout, even if they don't have an account
+ An empty cart should not be able to access the checkout page
+ If the shipping address and billing address are the same, a user should only
+  have to enter that address once
+ An email should be sent after the checkout process is completed
+
+-Unhappy Path Expectations:
+ Depending on the user's browser, they may be able to add items to their cart, 
+  but can't access the checkout page
+The item being purchased may not be able to be shipped to the address submitted
+ (like a PO box or an internatonal address)
+ User's choice of payment is declined, and the cart items are lost
