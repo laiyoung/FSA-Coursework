@@ -45,7 +45,7 @@ function describeTemperature(f) {
  */
 function getRandomInt(limit) {
   return Math.round(Math.random() * limit);
-  // Note: Math.random()doesn't need a defined parameter
+  // Note: Math.random()doesn't need a defined parameter/arguement
 }
 
 // -------------------- DO NOT CHANGE THE CODE BELOW ---------------------- //
