@@ -45,7 +45,6 @@ function getUppercaseNames(items) {
   console.log(mappedArray);
 }
 
-
 /**
  * @param {Item[]} items - array of items
  * @param {number} id - id of the item to find
@@ -107,7 +106,12 @@ function countItems(items) {
     (accumulator, currentValue) => accumulator + currentValue.quantity,
     0
   );
+  /** the accumulator keeps track of the current total and each current
+   * value(quantity) is added to this current total. The initial value is set
+   * to 0, because addition is being performed on the accumulator.
+   */
   return reducedCountArray;
+  //A return statement is used to print the output array (reducedCountArray)
 }
 
 /**
@@ -123,8 +127,13 @@ function calculateTotalPrice(items) {
     (accumulator, currentValue) =>
       accumulator + (currentValue.price * currentValue.quantity),
     0
+    /** the accumulator keeps track of the current total and each current
+   * value(price*quantity) is added to this current total. The initial value is set
+   * to 0, because addition is being performed on the accumulator.
+   */
   );
   return reducedPriceArray;
+   //A return statement is used to print the output array (reducedPriceArray)
 }
 
 // --------------------- DO NOT CHANGE THE CODE BELOW ------------------------ //

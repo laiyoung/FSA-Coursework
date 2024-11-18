@@ -9,24 +9,51 @@
 
 //represents a customer's donut order
 const donutOrder = {
-  glazed: 0,
-  chocolate: 0,
-  bearClaw: 0,
-  eclair: 0,
+  //Creating an object called donutOrder
+  Glazed: 0,
+  Chocolate: 0,
+  BearClaw: 0,
+  Eclair: 0,
+  /** Outlining the keys for the object donutOrder and setting the initial values
+   * of those keys to 0
+   */
 };
 
 //executed when the user clicks the '+' button
 function addOne(donutType) {
   donutOrder[donutType]++;
+  /** Creating a function called addOne that requires a parameter of donutType.
+   * The function uses donutOrder as an array and increments the parameter passed
+   * to the function (donutType), with the ++ operator
+  */
 }
 
 //executed when the user clicks the '-' button
-function removeOne(donutType) {}
+function removeOne(donutType) {
+  donutOrder[donutType]--;
+  /** Creating a function called removeOne that requires a parameter of donutType.
+   * The function uses donutOrder as an array and decrements the parameter passed
+   * to the function (donutType), with the -- operator
+  */
+}
 //executed when the user clicks the 'Reset' button
-function reset(donutType) {}
+function reset(donutType) {
+  donutOrder[donutType] = 0;
+   /** Creating a function called reset that requires a parameter of donutType.
+   * The function uses donutOrder as an array and sets the parameter passed
+   * to the function (donutType) as 0
+  */
+}
 
 //executed when the user clicks the 'Remove From Menu' button
-function removeFromMenu(donutType) {}
+function removeFromMenu(donutType) {
+  delete donutOrder[donutType]
+  /** Creating a function called removeFromMenu that requires a parameter of 
+   * donutType. The function uses donutOrder as an array and deletes the parameter 
+   * passed to the function (donutType), using the delete operator to remove the 
+   * parameter/property from the object
+  */
+}
 
 //********************************** Don't touch the below :-) */
 function render() {
