@@ -1,0 +1,26 @@
+Names:
+ //   const tr1 = docuement.createElement("tr");
+  //   tr1.textContent = "Bob";
+  //   const tr2 = docuement.createElement("tr");
+  //   tr2.textContent = "Emily";
+  //   const tr3 = docuement.createElement("tr");
+  //   tr3.textContent = "Carol";
+  //   table.append(tr1, tr2, tr3);
+
+Occupations:
+  //   const or1 = docuement.createElement("tr");
+  //   or1.textContent = "Writer";
+  //   const or2 = docuement.createElement("tr");
+  //   or2.textContent = "Teacher";
+  //   const or3 = docuement.createElement("tr");
+  //   or3.textContent = "Programmer";
+
+Prices:
+  //   const pr1 = docuement.createElement("tr");
+  //   pr1.textContent = "$30";
+  //   const pr2 = docuement.createElement("tr");
+  //   pr2.textContent = "$50";
+  //   const pr3 = docuement.createElement("tr");
+  //   pr3.textContent = "$60";
+
+  // table.append(tr1, tr2, tr3);
