@@ -1,3 +1,11 @@
+Trying to log the object properties inside the array:
+const names = freelancers.name;
+const occupations = freelancers.occupation;
+const price = freelancers.price;
+console.log(names)
+console.log(occupations)
+console.log(price)
+
 Names:
  //   const tr1 = docuement.createElement("tr");
   //   tr1.textContent = "Bob";
@@ -24,3 +32,29 @@ Prices:
   //   pr3.textContent = "$60";
 
   // table.append(tr1, tr2, tr3);
+
+Function for adding freelancers: 
+  class Freelancer {
+  // These are properties
+  name = " ";
+  occupation = " ";
+  price;
+  // the parens items are the arguments here
+  constructor(name, occupation, price) {
+    this.name = name;
+    this.occupation = occupation;
+    this.price = price;
+  }
+}
+// function addFreelancer(Freelancer) {
+//   const allFreelancers = freelancers;
+//   allFreelancers.push(Freelancer);
+// }
+// const prism = new Freelancer("Prism", "Driver", 20);
+// freelancers.addFreelancer(prism);
+
+
+Trying to change the paragraph to include the avg:
+const rootContainer = document.getElementById("root");
+avgParagraph2.textContent = "The Average Starting Price is :" (averagePrice());
+rootContainer.avgParagraph.appendChild(avgParagraph2);

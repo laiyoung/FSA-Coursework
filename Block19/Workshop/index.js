@@ -4,10 +4,17 @@ const freelancers = [
   { name: "Bob", occupation: "Teacher", price: 50 },
   { name: "Carol", occupation: "Programmer", price: 70 },
 ];
+console.table(freelancers);
 
-const names = ["Alice", "Bob", "Carol"];
-const occupations = [ "Writer", "Teacher", "Programmer"]
-const price = [30, 50, 70]
+const rootContainer = document.getElementById("root");
+
+const heading = document.createElement("h1");
+heading.textContent = "Freelancer Forum";
+rootContainer.appendChild(heading);
+
+const avgParagraph = document.createElement("p");
+avgParagraph.textContent = "The Average Starting Price is : ";
+rootContainer.appendChild(avgParagraph);
 
 function init() {
   /**
@@ -24,12 +31,10 @@ function init() {
    *   -Make a h2 heading for the available freelancers
    *    Add the new statement to the root div
    */
-  const heading = document.createElement("h1");
-  heading.textContent = "Freelancer Forum";
-  rootContainer.appendChild(heading);
 
-  "The Average Starting Price is ${avgpricefunction}"
-
+  const heading2 = document.createElement("h2");
+  heading2.textContent = "Available Freelancers";
+  rootContainer.appendChild(heading2);
 
   /**
    * 👉 STEP 3:
@@ -54,12 +59,22 @@ function init() {
    * 👉 STEP 4:
    *    Create a function to render the freelancer in our freelancer array
    */
-
+  function fillTable() {
+    for (var i = 0; i < freelancers.length; i++) {
+      var row = table.insertRow(i);
+      row.insertCell(0).innerHTML = freelancers[i].name;
+      row.insertCell(1).innerHTML = freelancers[i].occupation;
+      row.insertCell(2).innerHTML = freelancers[i].price;
+    }
+    document.body.append(table);
+  }
 
   /**
    * 👉 STEP 5:
    *    Call the function you created in step 4
    */
+
+  fillTable();
 }
 
 /**
@@ -67,17 +82,59 @@ function init() {
  *    Create a function to add a new freelancer to the freelancer array
  */
 
+function addFreelancer() {
+  freelancers.push({
+    name: "Prism",
+    occupation: "Personal Trainer",
+    price: 60,
+  });
+  console.table(freelancers);
+}
+addFreelancer();
+
 /**
  * 👉 STEP 7:
+ *    Create a function to keep track of the average price of a freelancer
+ */
+
+avgPrice = function averagePrice() {
+  function getPrices() {
+    let prices = [];
+    for (var i = 0; i < freelancers.length; ++i)
+      prices.push(freelancers[i].price);
+    return prices;
+  }
+  getPrices();
+  console.log(getPrices());
+
+  function priceAvg() {
+    const reducedPriceArray = getPrices().reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    return reducedPriceArray / getPrices().length;
+  }
+  priceAvg();
+  return console.log(priceAvg());
+};
+avgPrice();
+
+//Adding the avg to the starting paragraph:
+document.querySelector(
+  "p"
+).innerHTML = `The Average Starting Price is : ${avgPrice()}`;
+
+/**
+ * 👉 STEP 8:
  *    Add an interval to add a new freelancer every second
  */
 
+// const fillTable = setInterval(() => {
+//   row = table.insertRow(i);
+// }, 1000);
+
 //call init function
 init();
-
-
-
-
 
 /** You could also do a function for the intial appends:
 * function makeTableRow(parentContainer, textContent){
