@@ -5,6 +5,7 @@ const freelancers = [
   { name: "Carol", occupation: "Programmer", price: 70 },
 ];
 console.table(freelancers);
+const maxLength = 15;
 
 const rootContainer = document.getElementById("root");
 
@@ -59,14 +60,15 @@ function init() {
    * 👉 STEP 4:
    *    Create a function to render the freelancer in our freelancer array
    */
-  function fillTable() {
+  fillTable = function fillTable() {
     for (var i = 0; i < freelancers.length; i++) {
-      var row = table.insertRow(i);
+      var row = (table.insertRow(i));
       row.insertCell(0).innerHTML = freelancers[i].name;
       row.insertCell(1).innerHTML = freelancers[i].occupation;
       row.insertCell(2).innerHTML = freelancers[i].price;
     }
     document.body.append(table);
+    // window.setInterval (table.insertRow(i),1000)
   }
 
   /**
@@ -97,7 +99,7 @@ addFreelancer();
  *    Create a function to keep track of the average price of a freelancer
  */
 
-avgPrice = function averagePrice() {
+ avgPrice = function averagePrice() {
   function getPrices() {
     let prices = [];
     for (var i = 0; i < freelancers.length; ++i)
@@ -112,26 +114,32 @@ avgPrice = function averagePrice() {
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
-    return reducedPriceArray / getPrices().length;
+    return (reducedPriceArray / getPrices().length);
   }
-  priceAvg();
   return console.log(priceAvg());
 };
+
 avgPrice();
 
 //Adding the avg to the starting paragraph:
 document.querySelector(
   "p"
-).innerHTML = `The Average Starting Price is : ${avgPrice()}`;
+).innerHTML = `The Average Starting Price is : $${avgPrice()}`;
 
 /**
  * 👉 STEP 8:
  *    Add an interval to add a new freelancer every second
  */
+//Had to put the interval in the table, but it still doesn't work
 
-// const fillTable = setInterval(() => {
-//   row = table.insertRow(i);
-// }, 1000);
+// Tried the solution and the whole thing repeats instead of just the table:
+const addFreelancerInterval = setInterval(() => {
+  fillTable;
+  if (freelancers.length >= maxLength) {
+    clearInterval(addFreelancerInterval);
+  }
+}, 1000);
+
 
 //call init function
 init();
