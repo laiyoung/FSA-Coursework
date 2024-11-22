@@ -42,7 +42,8 @@ function getUppercaseNames(items) {
     return item.name.toUpperCase();
   });
   // Logging the new array
-  console.log(mappedArray);
+  // console.log(mappedArray);
+  return mappedArray
 }
 
 /**
@@ -57,7 +58,8 @@ function getItemById(items, id) {
     return item.id === id;
   });
   // Logging the new object
-  console.log(foundItem);
+  // console.log(foundItem);
+  return foundItem
 }
 
 /**
@@ -91,6 +93,7 @@ function getItemsByCategory(items, category) {
    * and logging the results
    */
   filterCategory.forEach((item) => console.log(item.name));
+  return filterCategory
 }
 
 /**

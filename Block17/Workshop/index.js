@@ -38,8 +38,9 @@ class Numbers {
          */
       }
     });
-    console.log(getOdds);
+    // console.log(getOdds);
     //The now filled array getOdds is printed to the console
+    return getOdds
   }
   evens() {
     //return the even numbers in data
@@ -55,8 +56,9 @@ class Numbers {
          */
       }
     });
-    console.log(getEvens);
+    // console.log(getEvens);
     //The now filled array getEvens is printed to the console
+    return getEvens
   }
   sum() {
     //return the sum of the numbers
@@ -75,6 +77,7 @@ class Numbers {
     return reducedSumArray;
     //A return statement is used to print the output array (reducedSumArray)
   }
+
   product() {
     //return the product of the numbers
     const reducedProductArray = this.data.reduce(
@@ -111,8 +114,9 @@ class Numbers {
          */
       }
     });
-    console.log(greaterThanArray);
+    // console.log(greaterThanArray);
     //The now filled array greaterThanArray is printed to the console
+    return greaterThanArray
   }
   howMany(target) {
     //return the count of a given number
@@ -139,6 +143,7 @@ class Numbers {
     //A return statement is used to output the resulting variable (count)
   }
 }
+
 
 //Prompt the user for a list of integers separated by commas
 const str = prompt("enter some numbers, like this", "1,2,3,3,5,9");
