@@ -31,9 +31,49 @@ Prices:
   //   const pr3 = docuement.createElement("tr");
   //   pr3.textContent = "$60";
 
+  Building Tables:
+  //   const nameColumn1 = document.createElement("th");
+//   nameColumn1.textContent = "Name";
+//   tbody.appendChild(nameColumn1);
+
+//   const jobColumn2 = document.createElement("th");
+//   jobColumn2.textContent = "Occupation";
+//   tbody.appendChild(jobColumn2);
+
+//   const priceColumn3 = document.createElement("th");
+//   priceColumn3.textContent = "Price";
+//   tbody.appendChild(priceColumn3);
+
   // table.append(tr1, tr2, tr3);
 
-Function for adding freelancers: 
+
+  //   const tbody = document.createElement(tbody);
+//   table.appendChild(tbody);
+
+//     const table = document.querySelector("#table");
+ //     table.appendChild(tableRow);
+
+
+
+
+// const rowElements = freelancers.map((freelancer) => {
+//         const newRow = document.createElement('tr');
+//         const { name, price, occupation } = freelancer;
+//         const nameDetail = document.createElement('td');
+//         nameDetail.innerText = name;
+
+//         const occupationDetail = document.createElement('td');
+//         occupationDetail.innerText = occupation;
+    
+//         const priceDetail = document.createElement('td');
+//         priceDetail.innerText = `$${price}`;
+//         newRow.append(nameDetail, occupationDetail, priceDetail);
+//         return newRow;
+// });
+
+Working on functions for adding freelancers: 
+const freelancer = document.createElement("tr");
+const freelancer = document.createElement("td");
   class Freelancer {
   // These are properties
   name = " ";
@@ -46,6 +86,8 @@ Function for adding freelancers:
     this.price = price;
   }
 }
+
+
 // function addFreelancer(Freelancer) {
 //   const allFreelancers = freelancers;
 //   allFreelancers.push(Freelancer);
@@ -53,6 +95,59 @@ Function for adding freelancers:
 // const prism = new Freelancer("Prism", "Driver", 20);
 // freelancers.addFreelancer(prism);
 
+
+
+const newRow = document.createElement("tr");
+  const { name, price, occupation } = freelancer;
+  const nameCell = document.createElement("td");
+  nameCell.innerText = name;
+
+  const occupationCell = document.createElement("td");
+  occupationCell.innerText = occupation;
+
+  const priceCell = document.createElement("td");
+  priceCell.innerText = `$${price}`;
+
+  // Append all the "td" elements to the row
+  newRow.append(nameCell, occupationCell, priceCell);
+  // Return the newly created row & its child elements
+  tBody.append(newRow);
+  return tableRowRender(freelancers);
+
+  function addFreelancer() {
+  const addPrice = Math.floor(Math.random() * 8) * 10 + 20;
+  const addName = names[Math.floor(Math.random() * names.length)];
+  const addJob = jobs[Math.floor(Math.random() * jobs.length)];
+
+  freelancers.push({ name: addName, occupation: addJob, price: addPrice });
+}
+
+function tableRowRender() {
+        const averagePrice = document.querySelector('#average-price');
+        const tableBody = document.querySelector('#table-body');
+      
+        // Create an array of row elements from the freelancers array
+        const rowElements = freelancers.map((freelancer) => {
+          // Create a new row for each freelancer
+          const newRow = document.createElement('tr');
+          // Object destructuring: https://dmitripavlutin.com/javascript-object-destructuring/
+          const { name, price, occupation } = freelancer;
+          // Create "td" elements for each detail & add the text
+          const nameDetail = document.createElement('td');
+          nameDetail.innerText = name;
+      
+          const occupationDetail = document.createElement('td');
+          occupationDetail.innerText = occupation;
+      
+          const priceDetail = document.createElement('td');
+          priceDetail.innerText = `$${price}`;
+      
+          // Append all the "td" elements to the row
+          newRow.append(nameDetail, occupationDetail, priceDetail);
+          // Return the newly created row & its child elements
+          
+        });
+}
 
 Trying to change the paragraph to include the avg:
 const rootContainer = document.getElementById("root");

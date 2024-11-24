@@ -1,4 +1,4 @@
-//Making an object of the data:
+//Making an object of the intial data + setting length parameter:
 const freelancers = [
   { name: "Alice", occupation: "Writer", price: 30 },
   { name: "Bob", occupation: "Teacher", price: 50 },
@@ -7,43 +7,68 @@ const freelancers = [
 console.table(freelancers);
 const maxLength = 15;
 
-const rootContainer = document.getElementById("root");
+//Possible Names:
+const names = [
+  "Aria",
+  "Elijah",
+  "Olivia",
+  "Jackson",
+  "Sophia",
+  "Liam",
+  "Emma",
+  "Mason",
+  "Isabella",
+  "Lucas",
+];
 
-const heading = document.createElement("h1");
-heading.textContent = "Freelancer Forum";
-rootContainer.appendChild(heading);
-
-const avgParagraph = document.createElement("p");
-avgParagraph.textContent = "The Average Starting Price is : ";
-rootContainer.appendChild(avgParagraph);
+//Possible Occupations:
+const jobs = [
+  "Software Developer",
+  "Teacher",
+  "Nurse",
+  "Mechanical Engineer",
+  "Graphic Designer",
+  "Chef",
+  "Marketing Analyst",
+  "Electrician",
+  "Physician",
+  "Data Scientist",
+];
 
 function init() {
   /**
    * 👉 STEP 1: Grab the div with the id of "root"
    */
-  const rootContainer = document.getElementById("root");
-
+  const root = document.getElementById("root");
   /**
+   *
    * 👉 STEP 2:
-   *   -Create a new h1 element that says "Frelancer Forum"
-   *    Add the new h1 to the root div
-   *   -Make an avg. price statement that changes as indices are added
-   *    Add the new statement to the root div
-   *   -Make a h2 heading for the available freelancers
-   *    Add the new statement to the root div
+   *    Create a new h1 + h2 elements for the headings
+   *    Add the new h1 + h2 elements to the root div
    */
+  const h1 = document.createElement("h1");
+  h1.textContent = "Freelancer Forum";
+  root.appendChild(h1);
 
-  const heading2 = document.createElement("h2");
-  heading2.textContent = "Available Freelancers";
-  rootContainer.appendChild(heading2);
+  const h2 = document.createElement("h2");
+  h2.textContent = "The average starting price is ";
+  root.appendChild(h2);
+
+  const availableh1 = document.createElement("h1");
+  availableh1.textContent = "Available Freelancers";
+  root.appendChild(availableh1);
 
   /**
    * 👉 STEP 3:
-   *    Create a table to hold our freelancers in
+   *    Create a table to hold our Freelancers in
    */
+  //Creating a table:
   const table = document.createElement("table");
-  rootContainer.appendChild(table);
+  root.appendChild(table);
+  //Creating a header table row:
+  const headerRow = document.createElement("tr");
 
+  // Creating and adding information colomns to the header table row:
   const col1 = document.createElement("th");
   col1.textContent = "Name";
   table.append(col1);
@@ -56,98 +81,53 @@ function init() {
   col3.textContent = "Starting Price";
   table.append(col3);
 
+  //Adding header table row to the table:
+  table.appendChild(headerRow);
+  //Adding new table to the root div:
+  root.appendChild(table);
+
   /**
    * 👉 STEP 4:
-   *    Create a function to render the freelancer in our freelancer array
+   *    Create a function to render the Freelancers array add a new Freelancer to
+   * the Freelancers array
    */
-  fillTable = function fillTable() {
-    for (var i = 0; i < freelancers.length; i++) {
-      var row = (table.insertRow(i));
-      row.insertCell(0).innerHTML = freelancers[i].name;
-      row.insertCell(1).innerHTML = freelancers[i].occupation;
-      row.insertCell(2).innerHTML = freelancers[i].price;
-    }
-    document.body.append(table);
-    // window.setInterval (table.insertRow(i),1000)
+  function renderTableRows() {
+    const newRow = document.createElement("tr");
+    const tableRow = document.createElement("table");
+
+
+    freelancers.forEach((freelancer) => {
+//     
+      const nameCell = document.createElement("td");
+      const occupationCell = document.createElement("td");
+      const priceCell = document.createElement("td");
+
+      nameCell.textContent = freelancer.name;
+      occupationCell.textContent = freelancer.occupation;
+      priceCell.textContent = `$${freelancer.price}`;
+
+      table.appendChild(newRow);
+      newRow.append(nameCell, occupationCell, priceCell);
+    });
+
   }
-
-  /**
-   * 👉 STEP 5:
-   *    Call the function you created in step 4
-   */
-
-  fillTable();
+  renderTableRows();
 }
-
-/**
- * 👉 STEP 6:
- *    Create a function to add a new freelancer to the freelancer array
- */
-
-function addFreelancer() {
-  freelancers.push({
-    name: "Prism",
-    occupation: "Personal Trainer",
-    price: 60,
-  });
-  console.table(freelancers);
-}
-addFreelancer();
-
-/**
- * 👉 STEP 7:
- *    Create a function to keep track of the average price of a freelancer
- */
-
- avgPrice = function averagePrice() {
-  function getPrices() {
-    let prices = [];
-    for (var i = 0; i < freelancers.length; ++i)
-      prices.push(freelancers[i].price);
-    return prices;
-  }
-  getPrices();
-  console.log(getPrices());
-
-  function priceAvg() {
-    const reducedPriceArray = getPrices().reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    );
-    return (reducedPriceArray / getPrices().length);
-  }
-  return console.log(priceAvg());
-};
-
-avgPrice();
-
-//Adding the avg to the starting paragraph:
-document.querySelector(
-  "p"
-).innerHTML = `The Average Starting Price is : $${avgPrice()}`;
 
 /**
  * 👉 STEP 8:
- *    Add an interval to add a new freelancer every second
+ *    Add an interval to add a new Freelancer every second
  */
-//Had to put the interval in the table, but it still doesn't work
+const freelancerIntervalId = setInterval(() => {
+  renderTableRows();
+  addFreelancer();
+  init();
 
-// Tried the solution and the whole thing repeats instead of just the table:
-const addFreelancerInterval = setInterval(() => {
-  fillTable;
+  // Clear setInterval when freelancers length is equal to max length
   if (freelancers.length >= maxLength) {
-    clearInterval(addFreelancerInterval);
+    clearInterval(freelancerIntervalId);
   }
-}, 1000);
-
+}, 2000);
 
 //call init function
 init();
-
-/** You could also do a function for the intial appends:
-* function makeTableRow(parentContainer, textContent){
-* const tr1 = document.createElement("tr");
-* tr1.textContent = textContent;
-* parentContainer ()
-}
-*/
