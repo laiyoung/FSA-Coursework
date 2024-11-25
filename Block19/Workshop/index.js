@@ -99,7 +99,7 @@ function renderTableRows() {
 
 renderTableRows();
 
-function init() {
+function mainRender() {
   /**
    * 👉 STEP 5:
    *    Create a function to add a new freelancers to the Freelancers array
@@ -114,32 +114,32 @@ function init() {
   }
   document.body.append(table);
 
+  // Adding the average calculation to the main render loop
+  const newAverage = calculateAveragePrice();
+  h2.innerText = `The average starting price is: $${newAverage}`;
+}
+
 /**
  * 👉 STEP 6:
  *    Create a function to change the average price
  */
 
-
 function calculateAveragePrice() {
-        const total = freelancers.reduce(
-          (subtotal, current) => subtotal + current.price,
-          0
-        );
-        return Math.round(total / freelancers.length);
-      }
-
-  const newAverage = calculateAveragePrice();
-  h2.innerText = `The average starting price is: $${newAverage}`;
+  //Calculating the avg:
+  const total = freelancers.reduce(
+    (subtotal, current) => subtotal + current.price,
+    0
+  );
+  return Math.round(total / freelancers.length);
 }
-
-
 
 /**
  * 👉 STEP 7:
  *    Add an interval to add a new Freelancer every second
  */
 const freelancerIntervalId = setInterval(() => {
-  init();
+  // calculateAveragePrice();
+  mainRender();
 
   // Clear setInterval when freelancers length is equal to max length
   setTimeout(() => {
@@ -147,6 +147,5 @@ const freelancerIntervalId = setInterval(() => {
   }, 5000);
 }, 1000);
 
-
 //call init function
-init();
+mainRender();

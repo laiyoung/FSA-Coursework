@@ -179,3 +179,28 @@ rootContainer.avgParagraph.appendChild(avgParagraph2);
 
 
 //   calculateAveragePrice();
+
+This only checks the freelancer array for averages, not the new inputs:
+function calculateAveragePrice() {
+  const total = freelancers.reduce(
+    (subtotal, current) => subtotal + current.price,
+    0
+  );
+  return Math.round(total / freelancers.length);
+}
+
+Finding the price table: 
+table.getElementsByTagName("td").item(2)
+
+
+function getPrices() {
+    myTableArray = [];
+    let tableData = table.getElementsByTagName("td").item(2);
+    if (tableData.length > 0) {
+      tableData.each(function () {
+        arrayOfThisColumn.push($(td).item(2));
+      });
+    }
+    console.log(myTableArray);
+  }
+  getPrices();
