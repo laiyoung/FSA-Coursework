@@ -5,7 +5,7 @@ const freelancers = [
   { name: "Carol", occupation: "Programmer", price: 70 },
 ];
 console.table(freelancers);
-const maxLength = 15;
+const maxLength = 5;
 
 //Possible Names:
 const names = [
@@ -34,100 +34,105 @@ const jobs = [
   "Physician",
   "Data Scientist",
 ];
+/**
+ * 👉 STEP 1: Grab the div with the id of "root"
+ */
+const root = document.getElementById("root");
+
+/**
+ * 👉 STEP 2:
+ *    Create a new h1 + h2 elements for the headings
+ *    Add the new h1 + h2 elements to the root div
+ */
+const h1 = document.createElement("h1");
+h1.textContent = "Freelancer Forum";
+root.appendChild(h1);
+
+const h2 = document.createElement("h2");
+h2.textContent = "The average starting price is ";
+root.appendChild(h2);
+
+const availableh1 = document.createElement("h1");
+availableh1.textContent = "Available Freelancers";
+root.appendChild(availableh1);
+
+/**
+ * 👉 STEP 3:
+ *    Create a table to hold our Freelancers in
+ */
+//Creating a table:
+const table = document.createElement("table");
+root.appendChild(table);
+//Creating a header table row:
+const headerRow = document.createElement("tr");
+
+// Creating and adding information colomns to the header table row:
+const col1 = document.createElement("th");
+col1.textContent = "Name";
+table.append(col1);
+
+const col2 = document.createElement("th");
+col2.textContent = "Occupation";
+table.append(col2);
+
+const col3 = document.createElement("th");
+col3.textContent = "Starting Price";
+table.append(col3);
+
+//Adding header table row to the table:
+table.appendChild(headerRow);
+//Adding new table to the root div:
+root.appendChild(table);
+
+/**
+ * 👉 STEP 4:
+ *    Create a function to render the Freelancers array
+ */
+function renderTableRows() {
+  for (var i = 0; i < freelancers.length; i++) {
+    var row = table.insertRow(i);
+    row.insertCell(0).innerHTML = freelancers[i].name;
+    row.insertCell(1).innerHTML = freelancers[i].occupation;
+    row.insertCell(2).innerHTML = freelancers[i].price;
+  }
+  document.body.append(table);
+}
+
+renderTableRows();
 
 function init() {
   /**
-   * 👉 STEP 1: Grab the div with the id of "root"
+   * 👉 STEP 5:
+   *    Create a function to add a new freelancers to the Freelancers array
    */
-  const root = document.getElementById("root");
-  /**
-   *
-   * 👉 STEP 2:
-   *    Create a new h1 + h2 elements for the headings
-   *    Add the new h1 + h2 elements to the root div
-   */
-  const h1 = document.createElement("h1");
-  h1.textContent = "Freelancer Forum";
-  root.appendChild(h1);
 
-  const h2 = document.createElement("h2");
-  h2.textContent = "The average starting price is ";
-  root.appendChild(h2);
-
-  const availableh1 = document.createElement("h1");
-  availableh1.textContent = "Available Freelancers";
-  root.appendChild(availableh1);
-
-  /**
-   * 👉 STEP 3:
-   *    Create a table to hold our Freelancers in
-   */
-  //Creating a table:
-  const table = document.createElement("table");
-  root.appendChild(table);
-  //Creating a header table row:
-  const headerRow = document.createElement("tr");
-
-  // Creating and adding information colomns to the header table row:
-  const col1 = document.createElement("th");
-  col1.textContent = "Name";
-  table.append(col1);
-
-  const col2 = document.createElement("th");
-  col2.textContent = "Occupation";
-  table.append(col2);
-
-  const col3 = document.createElement("th");
-  col3.textContent = "Starting Price";
-  table.append(col3);
-
-  //Adding header table row to the table:
-  table.appendChild(headerRow);
-  //Adding new table to the root div:
-  root.appendChild(table);
-
-  /**
-   * 👉 STEP 4:
-   *    Create a function to render the Freelancers array add a new Freelancer to
-   * the Freelancers array
-   */
-  function renderTableRows() {
-    const newRow = document.createElement("tr");
-    const tableRow = document.createElement("table");
-
-
-    freelancers.forEach((freelancer) => {
-//     
-      const nameCell = document.createElement("td");
-      const occupationCell = document.createElement("td");
-      const priceCell = document.createElement("td");
-
-      nameCell.textContent = freelancer.name;
-      occupationCell.textContent = freelancer.occupation;
-      priceCell.textContent = `$${freelancer.price}`;
-
-      table.appendChild(newRow);
-      newRow.append(nameCell, occupationCell, priceCell);
-    });
+    for (var i = 0; i < freelancers.length; i++) {
+      var row = table.insertRow(i);
+      row.insertCell(0).innerHTML =
+        names[Math.floor(Math.random() * names.length)];
+      row.insertCell(1).innerHTML =
+        jobs[Math.floor(Math.random() * jobs.length)];
+      row.insertCell(2).innerHTML = Math.floor(Math.random() * 8) * 10 + 20; 
+    }
+    document.body.append(table);
 
   }
-  renderTableRows();
-}
+
 
 /**
  * 👉 STEP 8:
  *    Add an interval to add a new Freelancer every second
  */
 const freelancerIntervalId = setInterval(() => {
-  renderTableRows();
-  addFreelancer();
+  //   addFreelancer();
   init();
 
   // Clear setInterval when freelancers length is equal to max length
-  if (freelancers.length >= maxLength) {
-    clearInterval(freelancerIntervalId);
-  }
-}, 2000);
+  setTimeout(() => {
+
+        clearInterval(freelancerIntervalId);
+      }, 5000);
+}, 1000);
 
 //call init function
 init();

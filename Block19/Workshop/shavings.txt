@@ -50,8 +50,31 @@ Prices:
   //   const tbody = document.createElement(tbody);
 //   table.appendChild(tbody);
 
+ const tableRow = document.createElement("table");
 //     const table = document.querySelector("#table");
  //     table.appendChild(tableRow);
+
+
+  // Create new freelancer object and push into the freelancers array
+    //     freelancers.push({ name, price, occupation });
+
+
+   // Makes a table with everything on 1 line:
+    //     const newRow = document.createElement("tr");
+
+    //     freelancers.forEach((freelancer) => {
+    //       const nameCell = document.createElement("td");
+    //       nameCell.textContent = freelancer.name;
+
+    //       const occupationCell = document.createElement("td");
+    //       occupationCell.textContent = freelancer.occupation;
+
+    //       const priceCell = document.createElement("td");
+    //       priceCell.textContent = `$${freelancer.price}`;
+
+    //       table.appendChild(newRow);
+    //       newRow.append(nameCell, occupationCell, priceCell);
+    //     });
 
 
 
