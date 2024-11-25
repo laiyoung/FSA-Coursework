@@ -1,11 +1,10 @@
-//Making an object of the intial data + setting length parameter:
+//Making an object of the intial data:
 const freelancers = [
   { name: "Alice", occupation: "Writer", price: 30 },
   { name: "Bob", occupation: "Teacher", price: 50 },
   { name: "Carol", occupation: "Programmer", price: 70 },
 ];
 console.table(freelancers);
-const maxLength = 5;
 
 //Possible Names:
 const names = [
@@ -49,7 +48,7 @@ h1.textContent = "Freelancer Forum";
 root.appendChild(h1);
 
 const h2 = document.createElement("h2");
-h2.textContent = "The average starting price is ";
+h2.textContent = "The average starting price is: ";
 root.appendChild(h2);
 
 const availableh1 = document.createElement("h1");
@@ -106,33 +105,48 @@ function init() {
    *    Create a function to add a new freelancers to the Freelancers array
    */
 
-    for (var i = 0; i < freelancers.length; i++) {
-      var row = table.insertRow(i);
-      row.insertCell(0).innerHTML =
-        names[Math.floor(Math.random() * names.length)];
-      row.insertCell(1).innerHTML =
-        jobs[Math.floor(Math.random() * jobs.length)];
-      row.insertCell(2).innerHTML = Math.floor(Math.random() * 8) * 10 + 20; 
-    }
-    document.body.append(table);
-
+  for (var i = 0; i < freelancers.length; i++) {
+    var row = table.insertRow(i);
+    row.insertCell(0).innerHTML =
+      names[Math.floor(Math.random() * names.length)];
+    row.insertCell(1).innerHTML = jobs[Math.floor(Math.random() * jobs.length)];
+    row.insertCell(2).innerHTML = Math.floor(Math.random() * 8) * 10 + 20;
   }
+  document.body.append(table);
+
+/**
+ * 👉 STEP 6:
+ *    Create a function to change the average price
+ */
+
+
+function calculateAveragePrice() {
+        const total = freelancers.reduce(
+          (subtotal, current) => subtotal + current.price,
+          0
+        );
+        return Math.round(total / freelancers.length);
+      }
+
+  const newAverage = calculateAveragePrice();
+  h2.innerText = `The average starting price is: $${newAverage}`;
+}
+
 
 
 /**
- * 👉 STEP 8:
+ * 👉 STEP 7:
  *    Add an interval to add a new Freelancer every second
  */
 const freelancerIntervalId = setInterval(() => {
-  //   addFreelancer();
   init();
 
   // Clear setInterval when freelancers length is equal to max length
   setTimeout(() => {
-
-        clearInterval(freelancerIntervalId);
-      }, 5000);
+    clearInterval(freelancerIntervalId);
+  }, 5000);
 }, 1000);
+
 
 //call init function
 init();

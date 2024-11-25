@@ -176,3 +176,6 @@ Trying to change the paragraph to include the avg:
 const rootContainer = document.getElementById("root");
 avgParagraph2.textContent = "The Average Starting Price is :" (averagePrice());
 rootContainer.avgParagraph.appendChild(avgParagraph2);
+
+
+//   calculateAveragePrice();
