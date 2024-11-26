@@ -88,8 +88,8 @@ root.appendChild(table);
  *    Create a function to render the Freelancers array
  */
 function renderTableRows() {
-  for (var i = 0; i < freelancers.length; i++) {
-    var row = table.insertRow(i);
+  for (let i = 0; i < freelancers.length; i++) {
+    let row = table.insertRow(i);
     row.insertCell(0).innerHTML = freelancers[i].name;
     row.insertCell(1).innerHTML = freelancers[i].occupation;
     row.insertCell(2).innerHTML = freelancers[i].price;
@@ -105,19 +105,29 @@ function mainRender() {
    *    Create a function to add a new freelancers to the Freelancers array
    */
 
-  for (var i = 0; i < freelancers.length; i++) {
-    var row = table.insertRow(i);
+  for (let i = 0; i < freelancers.length; i++) {
+    let row = table.insertRow(i);
     row.insertCell(0).innerHTML =
       names[Math.floor(Math.random() * names.length)];
     row.insertCell(1).innerHTML = jobs[Math.floor(Math.random() * jobs.length)];
     row.insertCell(2).innerHTML = Math.floor(Math.random() * 8) * 10 + 20;
   }
   document.body.append(table);
+  // Trying to push new freelancers to the original array:
+  // for (let i = 0; i < table.rows.length; i++) {
+  //   freelancers.push({
+  //     name: table.rows[i].cells[0].innerHTML, 
+  //     occupation:table.rows[i].cells[1].innerHTML , 
+  //     price: table.rows[i].cells[2].innerHTML,
+  //   });
+  // }
+  // console.table(freelancers)
 
   // Adding the average calculation to the main render loop
   const newAverage = calculateAveragePrice();
   h2.innerText = `The average starting price is: $${newAverage}`;
 }
+
 
 /**
  * 👉 STEP 6:
