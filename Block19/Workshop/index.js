@@ -113,6 +113,7 @@ function mainRender() {
     row.insertCell(2).innerHTML = Math.floor(Math.random() * 8) * 10 + 20;
   }
   document.body.append(table);
+  
   // Trying to push new freelancers to the original array:
   // for (let i = 0; i < table.rows.length; i++) {
   //   freelancers.push({
