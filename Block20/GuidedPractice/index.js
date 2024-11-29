@@ -6,9 +6,15 @@ const state = {
 
 /** Moves a sheep from start to target */
 function moveSheep() {
-  state.target.push(state.start.pop())
+  state.target.push(state.start.pop());
   render();
 }
+// Another way to do this:
+/**function moveSheep() {
+ * const sheep = state.start.pop();
+ * state.target.push(sheep);
+ * }
+ */
 
 // === Render ===
 
@@ -22,8 +28,16 @@ function renderStartSheep() {
     li.append(button);
 
     // TODO: Add event listener so the sheep moves when clicked
-    button.addEventListener("click", moveSheep)
-
+    button.addEventListener("click", moveSheep);
+    // Another way to do this:
+      // ...
+    /** button.addEventListener("click", () => {
+     * moveSheep();
+     * render();
+     * });
+     * // ...
+     * }
+     */
     return li;
   });
 
@@ -59,12 +73,24 @@ render();
 const form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  const input = document.getElementById("numSheep")
-  let num = input.value
-  while(num > 0){
-    state.start.push("sheep")
+  const input = document.getElementById("numSheep");
+  let num = input.value;
+  while (num > 0) {
+    state.start.push("sheep");
     num--;
     // counting down the num of sheep to add, as they're added to the bank
   }
   render();
+
+  // Another way to do this:
+  /** const form = document.querySelector("form");
+   * form.addEventListener("submit", (event) => {
+   * event.preventDefault();
+   * const numberInput = document.querySelector("#numSheep");
+   * for (let i = 0; i < numberInput.value; i++) {
+   * state.start.push("sheep");
+   * }
+   * render();
+   * });
+   */
 });
