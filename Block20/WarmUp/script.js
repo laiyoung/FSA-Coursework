@@ -17,6 +17,7 @@ Without making any changes to the html, write JavaScript that:
 
 //Your Code below
 const colorDiv = document.querySelector("#colorBox")
+//The query selector uses a # for delecting IDs (not for HTML elements)
 const newParagraph = document.createElement("p")
 //1)
 document.getElementById("mainHeading").innerHTML = "DOM Manipulation is Fun!";

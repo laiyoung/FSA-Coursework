@@ -1,9 +1,52 @@
-// === State ===
+// === Constants + State Containers ===
 const state = {
   start: [],
   targetEven: [],
   targetOdd: [],
 };
+const form = document.querySelector("form")
+const sortOneButton = document.getElementById("sortOne")
+const sortAllButton = 
+
+
+// === Event Listeners + Associated Functions ===
+
+//Event Listeners:
+
+
+//Functions:
+/** Add Numbers Function */
+
+/** Sort By 1 Function */
+
+/** Sort All Function */
+
+// === Renders ===
+
+/** Rendering Starting Bank */
+function renderStartingNumbers() {
+
+}
+/** Rendering Even Bank*/
+function renderEvenNumbers() {
+
+}
+
+/** Rendering Odd Bank */
+function renderOddNumbers() {
+
+}
+
+//Rendering all bank functions:
+function render() {
+  renderStartingNumbers();
+  renderEvenNumbers();
+  renderOddNumbers();
+}
+// === Script ===
+// Initial render
+render();
+
 
 // Moving Numbers:
 // function moveNumber(number) {
@@ -14,41 +57,3 @@ const state = {
 //   }
 //   render();
 // }
-
-// === Renders ===
-
-/** Rendering Starting Bank */
-// function renderStartingNumbers() {
-//   const startingNumber = state.start.map((number) => {
-//     const li = document.createElement("li");
-
-//     const button = document.createElement("Add Number");
-//     button.textContent = "number";
-//     li.append(button);
-//     console.log (startingNumber)
-//     return li;
-//   });
-//   const numberBank = document.querySelector("#sortedNumbers");
-//   numberBank.replaceChildren(...startingNumber);
-// }
-/** Rendering Sort by 1 */
-function renderSort1() {
-
-}
-
-/** Rendering Sort All */
-function renderSortAll() {
-
-}
-
-//Rendering all bank functions:
-function render() {
-  renderStartingNumbers();
-  renderSort1();
-  renderSortAll();
-}
-// === Script ===
-// Initial render
-render();
-
-//Adding numbers to the starting bank when the button is pressed:
