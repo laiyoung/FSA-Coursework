@@ -1,0 +1,19 @@
+  const numberBank = document.querySelector("#numberBank output");
+
+  // Moving Numbers:
+// function moveNumber(number) {
+//   if (number % 2 === 0) {
+//     state.targetEven.push(state.start.pop());
+//   } else {
+//     state.targetOdd.push(state.start.pop());
+//   }
+//  
+// }
+
+document.querySelector("#number");
+
+/** Rendering Starting Bank */
+// function renderStartingNumbers() {
+//   const numberBankDisplay = document.querySelector("#numberBank output");
+//   numberBankDisplay.innerHTML = state.start;
+// }
