@@ -45,7 +45,7 @@
 
 //Form Submission:
 /** document.getElementById("myForm").addEventListener("submit", function (event) {
- * event.preventDefault();  //<---- What is this doing?
+ * event.preventDefault();  //<----(keeps you from losing values upon refresh)
  * document.getElementById("thankyouMessage").style.display = "block";
  * });
  * /

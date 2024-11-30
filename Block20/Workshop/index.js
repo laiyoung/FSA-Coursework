@@ -4,18 +4,22 @@ const state = {
   targetEven: [],
   targetOdd: [],
 };
-const form = document.querySelector("form")
-const sortOneButton = document.getElementById("sortOne")
-const sortAllButton = 
+const form = document.querySelector("form");
+const sortOneButton = document.getElementById("sortOne");
+const sortAllButton = document.getElementById("sortAll");
 
 
 // === Event Listeners + Associated Functions ===
 
 //Event Listeners:
-
-
-//Functions:
+form.addEventListener("submit", function(event) {
+event.preventDefault();
 /** Add Numbers Function */
+
+
+});
+
+
 
 /** Sort By 1 Function */
 
