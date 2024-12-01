@@ -10,6 +10,23 @@
 //  
 // }
 
+Add #s as a nested function:
+addNumsForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  /** Add Numbers Function */
+  const number = addNumsForm.elements.number.value;
+  if (number != "") {
+    state.start.push(number);
+  }
+  
+  // Starting#s render function needed to be here to make the #s appear:
+  function renderStartingNumbers() {
+    const numberBankDisplay = document.querySelector("#numberBank output");
+    numberBankDisplay.innerHTML = state.start;
+  }
+  renderStartingNumbers();
+});
+
 document.querySelector("#number");
 
 /** Rendering Starting Bank */
@@ -17,3 +34,13 @@ document.querySelector("#number");
 //   const numberBankDisplay = document.querySelector("#numberBank output");
 //   numberBankDisplay.innerHTML = state.start;
 // }
+
+Trying to make the number bank clear:
+  const numberClear = form.elements;
+  numberClear["numberClear"].value = "";
+
+  const numberClear = document.getElementById("numberClear");
+  numberClear.value = " ";
+
+   document.getElementById("numberClear") = " ";
+   

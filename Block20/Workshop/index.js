@@ -13,19 +13,24 @@ const sortAllButton = document.getElementById("sortAll");
 //Adding Numbers to Form:
 addNumsForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  /** Add Numbers Function */
+
+  addNumbers();
+  renderStartingNumbers();
+});
+
+/** Add Numbers Function */
+function addNumbers() {
   const number = addNumsForm.elements.number.value;
   if (number != "") {
     state.start.push(number);
-    console.log(state);
   }
-
-  function renderStartingNumbers() {
-    const numberBankDisplay = document.querySelector("#numberBank output");
-    numberBankDisplay.innerHTML = state.start;
-  }
-  renderStartingNumbers()
-});
+  renderStartingNumbers();
+}
+// Starting#s render function needed to be here to make the #s appear:
+function renderStartingNumbers() {
+  const numberBankDisplay = document.querySelector("#numberBank output");
+  numberBankDisplay.innerHTML = state.start;
+}
 
 //Sort By 1:
 sortOneButton.addEventListener("click", function (event) {
@@ -47,7 +52,7 @@ sortAllButton.addEventListener("click", function (event) {
   render(); //Necessary to trigger sort renders
 });
 
-// === Even/Odd Function for Nesting in Sort Functions ===
+// === Even/Odd Function for Nesting in Sort Button Functions ===
 function sortNumber(number) {
   if (number % 2 === 0) {
     state.targetEven.push(number);
@@ -72,7 +77,6 @@ function renderOddNumbers() {
 
 //Rendering sorting functions:
 function render() {
-  // renderStartingNumbers();
   renderEvenNumbers();
   renderOddNumbers();
 }
@@ -87,11 +91,11 @@ render();
  * defined in each of those functions.
  */
 
-/** Originally, I had all the render functions all together, including the 
- * Starting Number render, but that meant the number bank wouldn't display; 
+/** Originally, I had all the render functions all together, including the
+ * Starting Number render, but that meant the number bank wouldn't display;
  * even though the numbers would pop up when they were moved to the odd or
  * even bank. I had to move the Starting Number render to INSIDE the addNumsForm
  * event listener for the numbers to pop up. This also meant removing the Starting
- * Number render from the bottom render function. 
- *  
-*/
+ * Number render from the bottom render function.
+ *
+ */
