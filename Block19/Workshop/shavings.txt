@@ -204,3 +204,9 @@ function getPrices() {
     console.log(myTableArray);
   }
   getPrices();
+
+
+  average = total / freelancers.length
+  document.querySelector("h2").textContent = average;
+   total += table[2] * 1.0
+h2.innerText = `The average starting price is: $${(total / table[2]).toFixed(2)}`;

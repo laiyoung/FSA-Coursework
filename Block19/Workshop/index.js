@@ -142,6 +142,7 @@ function calculateAveragePrice() {
     0
   );
   return Math.round(total / freelancers.length);
+  
 }
 
 /**
