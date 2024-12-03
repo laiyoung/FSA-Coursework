@@ -15,7 +15,7 @@ addNumsForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
   addNumbers();
-  renderStartingNumbers();
+  renderNumbersBank();
 });
 
 /** Add Numbers Function */
@@ -24,32 +24,32 @@ function addNumbers() {
   if (number != "") {
     state.start.push(number);
   }
-  renderStartingNumbers();
+  renderNumbersBank();
 }
 // Starting#s render function needed to be here to make the #s appear:
-function renderStartingNumbers() {
+function renderNumbersBank() {
   const numberBankDisplay = document.querySelector("#numberBank output");
   numberBankDisplay.innerHTML = state.start;
 }
 
 //Sort By 1:
 sortOneButton.addEventListener("click", function (event) {
-  event.preventDefault();
   /** Sort By 1 Function */
   const number = state.start.shift();
   sortNumber(number);
   render(); //Necessary to trigger sort renders
+  renderNumbersBank();
 });
 
 //Sort By All:
 sortAllButton.addEventListener("click", function (event) {
-  event.preventDefault();
   /** Sort All Function */
   while (state.start.length > 0) {
     const number = state.start.shift();
     sortNumber(number);
   }
   render(); //Necessary to trigger sort renders
+  renderNumbersBank();
 });
 
 // === Even/Odd Function for Nesting in Sort Button Functions ===
@@ -91,7 +91,7 @@ render();
  * defined in each of those functions.
  */
 
-/** Originally, I had all the render functions all together, including the
+/** Originally, I had all the render functions together, including the
  * Starting Number render, but that meant the number bank wouldn't display;
  * even though the numbers would pop up when they were moved to the odd or
  * even bank. I had to move the Starting Number render to INSIDE the addNumsForm
