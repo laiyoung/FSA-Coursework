@@ -115,7 +115,7 @@ function mainRender() {
   document.body.append(table);
   
   // Trying to push new freelancers to the original array:
-  // for (let i = 0; i < table.rows.length; i++) {
+  // for (let i = 0; i < freelancers.length; i++) {
   //   freelancers.push({
   //     name: table.rows[i].cells[0].innerHTML, 
   //     occupation:table.rows[i].cells[1].innerHTML , 
