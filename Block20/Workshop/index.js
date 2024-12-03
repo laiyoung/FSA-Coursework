@@ -48,6 +48,7 @@ sortAllButton.addEventListener("click", function (event) {
     const number = state.start.shift();
     sortNumber(number);
   }
+  state.start = [];
   render(); //Necessary to trigger sort renders
   renderNumbersBank();
 });
