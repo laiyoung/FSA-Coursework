@@ -51,7 +51,7 @@ async function addParty(newEvent) {
   }
 }
 
-// Delete Event Function:
+// Delete Event Function (only shows delete on refresh):
 async function deleteParty(event) {
   try {
     const promise = await fetch(API_URL + "/" + event.id, {
