@@ -116,9 +116,7 @@ function renderParties() {
     const deleteButton = document.createElement("button");
     deleteButton.innerText = "Delete Event";
     eventCard.append(deleteButton);
-    deleteButton.addEventListener("click", async () => {
-      await deleteParty(event);
-    });
+    deleteButton.addEventListener("click", () => deleteParty(event));
 
     return eventCard;
   });

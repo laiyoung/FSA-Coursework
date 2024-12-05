@@ -31,3 +31,6 @@ The delete button doesn't require the header explanation:
 
   Removing the delete alert:
   alert("Unable to delete event");
+Removing the async from the delete button:
+deleteButton.addEventListener("click", {async () => 
+      await deleteParty(event)});
