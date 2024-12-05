@@ -56,6 +56,9 @@ async function deleteParty(event) {
   try {
     const promise = await fetch(API_URL + "/" + event.id, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     const response = await promise.json();
 
@@ -99,7 +102,7 @@ function renderParties() {
   const eventElements = state.events.map((event) => {
     const eventDate = new Date(event.date).toLocaleString();
 
-    const eventCard = document.createElement('section');
+    const eventCard = document.createElement("section");
     eventCard.innerHTML = `
       <div>
         <h3>${event.name}</h3>
@@ -109,15 +112,13 @@ function renderParties() {
       </div>
     `;
 
-    // Use createElement because we need to attach an event listener
-    const deleteButton = document.createElement('button');
-    deleteButton.innerText = 'Delete Event';
-    // Append button to event card section
+    // Delete Button and Event Listener
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "Delete Event";
     eventCard.append(deleteButton);
-    // Attach event listener to button so the correct event is deleted
-    // How does this button have reference to the correct event id?
-    // It has to do with closure: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
-    deleteButton.addEventListener('click', () => deleteParty(event.id));
+    deleteButton.addEventListener("click", async () => {
+      await deleteParty(event);
+    });
 
     return eventCard;
   });
