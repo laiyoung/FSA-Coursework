@@ -1,0 +1,6 @@
+Guided Practice - Music
+For this guided practice, you will practice using fetch to communicate with an API that serves data about musicians. The goal is to get you comfortable with the process of making a request, parsing the response, and using the data to update state.
+
+Read through the API documentation. You will be working with the /artists endpoint.
+
+Some starter code has been provided for you, so make sure to read through it before you begin working on the prompts.
