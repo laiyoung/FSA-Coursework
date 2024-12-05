@@ -58,15 +58,12 @@ async function deleteParty(event) {
       method: "DELETE",
     });
     const response = await promise.json();
-    console.log(response);
-
-    if (!response.success) {
+    
+    if (!response.ok) {
       throw new Error("Event could not be deleted.");
     }
-    console.log(response.data);
     render();
   } catch (error) {
-    console.log(error);
     alert("Unable to delete event");
   }
 }

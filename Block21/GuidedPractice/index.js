@@ -11,98 +11,117 @@ const state = {
 async function getArtists() {
   try {
     const promise = await fetch(API_URL);
-    //   console.log(response.json());
     const response = await promise.json();
-
     if (!response.success) {
       throw response.error;
     }
-    console.log(response.data);
     state.artists = response.data;
   } catch (error) {
-    console.log(error);
-    alert("Unable to load artist");
+    alert("Unable to load Artists");
   }
 }
 
 /** Asks the API to create a new artist based on the given `artist` */
 async function addArtist(artist) {
-  const requestObject = {
-    name: "Laigha",
-    imageUrl: "https://www.example.com/image.jpg",
-    description: "This is a description of the artist.",
-  };
-  const promise = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(artist),
-  });
-  const response = await promise.json();
-  console.log(response);
-  render();
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(artist),
+    });
+    if (!response.ok) {
+      throw new Error(
+        "Unable to add artist due to Http error: " + response.status
+      );
+    }
+  } catch (error) {
+    alert(error.message);
+  }
 }
-// Delete Function:
+/** Asks the API to delete the given artist */
 async function deleteArtist(artist) {
-  const promise = await fetch(API_URL + "/" + artist.id, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const response = await promise.json();
-  console.log(response);
-  render();
+  try {
+    const response = await fetch(API_URL + "/" + artist.id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(
+        "Unable to delete artist due to Http error: " + response.status
+      );
+    }
+    render();
+  } catch (error) {
+    alert(error.message);
+  }
 }
 
 // === Render ===
 
 /** Renders artists from state */
 function renderArtists() {
-  const ul = document.getElementById("artists");
-  ul.innerHTML = "";
-  state.artists.forEach((artist) => {
-    const li = document.createElement("li");
-    const div = document.createElement("div");
+  const artistList = document.querySelector("#artists");
+
+  if (!state.artists.length) {
+    artistList.innerHTML = "<li>No artists.</li>";
+    return;
+  }
+
+  const artistCards = state.artists.map((artist) => {
+    const card = document.createElement("li");
+    //H1 for Artist Name
     const h1 = document.createElement("h1");
     h1.textContent = artist.name;
-    div.appendChild(h1);
+
+    //H2 for Artist Description
+    const h2 = document.createElement("h2");
+    h2.textContent = artist.description;
+
+    //Image of Artist
+    const image = document.createElement("img");
+    image.src = artist.imageUrl; //set the img src to be the imageUrl from the artist object
+    image.style.width = "50%";
+    image.style.height = "50%";
+
+    //Button to Delete the Artist
     const deleteButton = document.createElement("button");
-    deleteButton.id = artist.id;
     deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", () => {
-      deleteArtist(artist);
+    deleteButton.style.display = "block";
+    deleteButton.addEventListener("click", async () => {
+      await deleteArtist(artist);
     });
 
-    div.appendChild(deleteButton);
-    li.appendChild(div);
-    ul.appendChild(li);
+    card.append(h1, h2, image, deleteButton);
+    return card;
   });
-}
 
+  artistList.replaceChildren(...artistCards);
+}
 /** Syncs state with the API and rerender */
 async function render() {
   await getArtists();
   renderArtists();
-  const form = document.getElementById("addArtist");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-    //     const name = formData.get("artistName");
-    //     const imageUrl = formData.get("imageUrl");
-    //     const description = formData.get("description");
-    const artist = {
-      name: formData.get("artistName"),
-      imageUrl: formData.get("imageUrl"),
-      description: formData.get("description"),
-    };
-    addArtist(artist);
-  });
 }
 
 // === Script ===
 
 render();
 
-// TODO: Add artist with form data when the form is submitted
+// Add listener to form
+const form = document.getElementById("addArtist");
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const artist = {
+    name: form.artistName.value,
+    description: form.description.value,
+    imageUrl: form.imageUrl.value,
+  };
+
+  await addArtist(artist);
+  render();
+});
