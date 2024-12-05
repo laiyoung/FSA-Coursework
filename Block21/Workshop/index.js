@@ -6,14 +6,8 @@ const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api/${COHORT}`;
 const state = {
   events: [],
 };
+// === References ===
 const form = document.getElementById("addEvent");
-const formData = new FormData(form);
-const newEvent = {
-  name: formData.get("eventName"),
-  description: formData.get("description"),
-  date: formData.get("date"),
-  location: formData.get("location"),
-};
 
 /** Updates state with events from API */
 async function getParties() {
@@ -60,14 +54,14 @@ async function addParty(newEvent) {
 // Delete Event Function:
 async function deleteParty(event) {
   try {
-    const promise = await fetch(API_URL + "/" + event.id, {
+    const promise = await fetch(`${BASE_URL}/events/${id}`, {
       method: "DELETE",
     });
     const response = await promise.json();
     console.log(response);
 
     if (!response.success) {
-      throw new Error('Event could not be deleted.');
+      throw new Error("Event could not be deleted.");
     }
     console.log(response.data);
     render();
@@ -77,7 +71,26 @@ async function deleteParty(event) {
   }
 }
 
-// === Render ===
+// === Event Listener for Submissions ===
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  try {
+    const eventDate = new Date(form.eventDate.value).toISOString();
+    const formData = new FormData(form);
+    const newEvent = {
+      name: formData.get("eventName"),
+      description: formData.get("description"),
+      date: eventDate,
+      location: formData.get("location"),
+    };
+    await addParty(newEvent);
+    form.reset();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// === Renders ===
 
 /** Renders events from state */
 function renderParties() {
@@ -93,7 +106,7 @@ function renderParties() {
     deleteButton.id = event.id;
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", () => {
-      deleteParty(event);
+      deleteParty(event.id);
     });
 
     div.appendChild(deleteButton);
@@ -106,11 +119,6 @@ function renderParties() {
 async function render() {
   await getParties();
   renderParties();
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-  
-    addParty(newEvent);
-  });
 }
 
 // === Script ===
