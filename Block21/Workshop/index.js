@@ -54,7 +54,7 @@ async function addParty(newEvent) {
 // Delete Event Function:
 async function deleteParty(event) {
   try {
-    const promise = await fetch(`${BASE_URL}/events/${id}`, {
+    const promise = await fetch(API_URL + "/" + event.id, {
       method: "DELETE",
     });
     const response = await promise.json();
@@ -99,14 +99,14 @@ function renderParties() {
   state.events.forEach((event) => {
     const li = document.createElement("li");
     const div = document.createElement("div");
-    const h1 = document.createElement("h1");
-    h1.textContent = event.name;
-    div.appendChild(h1);
+    const h2 = document.createElement("h2");
+    h2.textContent = event.name;
+    div.appendChild(h2);
     const deleteButton = document.createElement("button");
     deleteButton.id = event.id;
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", () => {
-      deleteParty(event.id);
+      deleteParty(event);
     });
 
     div.appendChild(deleteButton);
