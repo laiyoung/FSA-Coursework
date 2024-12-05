@@ -7,3 +7,24 @@ The delete button doesn't require the header explanation:
  headers: {
         "Content-Type": "application/json",
       },
+
+1st Render Attempt:
+  const ul = document.getElementById("eventsForm");
+  ul.innerHTML = "";
+  state.events.forEach((event) => {
+    const li = document.createElement("li");
+    const div = document.createElement("div");
+    const h2 = document.createElement("h2");
+    h2.textContent = event.name;
+    div.appendChild(h2);
+    const deleteButton = document.createElement("button");
+    deleteButton.id = event.id;
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => {
+      deleteParty(event);
+    });
+
+    div.appendChild(deleteButton);
+    li.appendChild(div);
+    ul.appendChild(li);
+  });

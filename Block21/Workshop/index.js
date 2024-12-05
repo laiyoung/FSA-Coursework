@@ -58,7 +58,7 @@ async function deleteParty(event) {
       method: "DELETE",
     });
     const response = await promise.json();
-    
+
     if (!response.ok) {
       throw new Error("Event could not be deleted.");
     }
@@ -71,9 +71,9 @@ async function deleteParty(event) {
 // === Event Listener for Submissions ===
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  const formData = new FormData(form);
+  const eventDate = new Date(form.eventDate.value).toISOString();
   try {
-    const eventDate = new Date(form.eventDate.value).toISOString();
-    const formData = new FormData(form);
     const newEvent = {
       name: formData.get("eventName"),
       description: formData.get("description"),
@@ -91,25 +91,38 @@ form.addEventListener("submit", async (event) => {
 
 /** Renders events from state */
 function renderParties() {
-  const ul = document.getElementById("eventsForm");
-  ul.innerHTML = "";
-  state.events.forEach((event) => {
-    const li = document.createElement("li");
-    const div = document.createElement("div");
-    const h2 = document.createElement("h2");
-    h2.textContent = event.name;
-    div.appendChild(h2);
-    const deleteButton = document.createElement("button");
-    deleteButton.id = event.id;
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", () => {
-      deleteParty(event);
-    });
+  const eventList = document.querySelector("#eventsForm");
+  if (!state.events.length) {
+    eventList.innerHTML = "<li>No events.</li>";
+    return;
+  }
+  const eventElements = state.events.map((event) => {
+    const eventDate = new Date(event.date).toLocaleString();
 
-    div.appendChild(deleteButton);
-    li.appendChild(div);
-    ul.appendChild(li);
+    const eventCard = document.createElement('section');
+    eventCard.innerHTML = `
+      <div>
+        <h3>${event.name}</h3>
+        <p>${event.description}</p>
+        <p>${eventDate}</p>
+        <p>${event.location}</p>
+      </div>
+    `;
+
+    // Use createElement because we need to attach an event listener
+    const deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Delete Event';
+    // Append button to event card section
+    eventCard.append(deleteButton);
+    // Attach event listener to button so the correct event is deleted
+    // How does this button have reference to the correct event id?
+    // It has to do with closure: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+    deleteButton.addEventListener('click', () => deleteParty(event.id));
+
+    return eventCard;
   });
+
+  eventList.replaceChildren(...eventElements);
 }
 
 /** Syncs state with the API and rerenders */
