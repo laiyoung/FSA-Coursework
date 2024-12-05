@@ -67,7 +67,7 @@ async function deleteParty(event) {
     }
     render();
   } catch (error) {
-    alert("Unable to delete event");
+    console.log(error);
   }
 }
 

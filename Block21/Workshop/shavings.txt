@@ -28,3 +28,6 @@ The delete button doesn't require the header explanation:
     li.appendChild(div);
     ul.appendChild(li);
   });
+
+  Removing the delete alert:
+  alert("Unable to delete event");
