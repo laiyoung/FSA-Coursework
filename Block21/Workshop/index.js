@@ -1,5 +1,5 @@
 const COHORT = "2409-GHP-ET-WEB-PT";
-const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api/${COHORT}`;
+const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api/${COHORT}/events`;
 
 // === State ===
 
@@ -12,7 +12,7 @@ const form = document.getElementById("addEvent");
 /** Updates state with events from API */
 async function getParties() {
   try {
-    const promise = await fetch(`${API_URL}/events`);
+    const promise = await fetch(API_URL);
     //   console.log(response.json());
     const response = await promise.json();
 
@@ -30,7 +30,7 @@ async function getParties() {
 /** Asks the API to create a new event based on the given `event` */
 async function addParty(newEvent) {
   try {
-    const promise = await fetch(`${API_URL}/events`, {
+    const promise = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
