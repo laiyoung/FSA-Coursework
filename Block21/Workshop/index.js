@@ -6,6 +6,14 @@ const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api/${COHORT}`;
 const state = {
   events: [],
 };
+const form = document.getElementById("addEvent");
+const formData = new FormData(form);
+const newEvent = {
+  name: formData.get("eventName"),
+  description: formData.get("description"),
+  date: formData.get("date"),
+  location: formData.get("location"),
+};
 
 /** Updates state with events from API */
 async function getParties() {
@@ -51,15 +59,22 @@ async function addParty(newEvent) {
 
 // Delete Event Function:
 async function deleteParty(event) {
-  const promise = await fetch(API_URL + "/" + event.id, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const response = await promise.json();
-  console.log(response);
-  render();
+  try {
+    const promise = await fetch(API_URL + "/" + event.id, {
+      method: "DELETE",
+    });
+    const response = await promise.json();
+    console.log(response);
+
+    if (!response.success) {
+      throw new Error('Event could not be deleted.');
+    }
+    console.log(response.data);
+    render();
+  } catch (error) {
+    console.log(error);
+    alert("Unable to delete event");
+  }
 }
 
 // === Render ===
@@ -91,20 +106,10 @@ function renderParties() {
 async function render() {
   await getParties();
   renderParties();
-  const form = document.getElementById("addEvent");
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    const formData = new FormData(form);
-    //     const name = formData.get("artistName");
-    //     const imageUrl = formData.get("imageUrl");
-    //     const description = formData.get("description");
-    const event = {
-      name: formData.get("eventName"),
-      description: formData.get("description"),
-      date: formData.get("date"),
-      location: formData.get("location"),
-    };
-    addParty(event);
+  
+    addParty(newEvent);
   });
 }
 

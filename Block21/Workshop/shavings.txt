@@ -1,0 +1,9 @@
+Another way to define constants:
+ //     const name = formData.get("artistName");
+    //     const imageUrl = formData.get("imageUrl");
+    //     const description = formData.get("description");
+
+The delete button doesn't require the header explanation:
+ headers: {
+        "Content-Type": "application/json",
+      },
