@@ -34,3 +34,9 @@ The delete button doesn't require the header explanation:
 Removing the async from the delete button:
 deleteButton.addEventListener("click", {async () => 
       await deleteParty(event)});
+
+         // const response = await promise.json();
+
+    // if (!response.ok) {
+    //   throw new Error("Event could not be deleted.");
+    // }

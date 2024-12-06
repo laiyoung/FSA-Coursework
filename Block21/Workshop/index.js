@@ -54,18 +54,15 @@ async function addParty(newEvent) {
 // Delete Event Function (only shows delete on refresh):
 async function deleteParty(event) {
   try {
-    const promise = await fetch(API_URL + "/" + event.id, {
+    await fetch(API_URL + "/" + event.id, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const response = await promise.json();
-
-    if (!response.ok) {
-      throw new Error("Event could not be deleted.");
-    }
+ 
     render();
+    // console.log("inside delete party");
   } catch (error) {
     console.log(error);
   }
@@ -126,6 +123,7 @@ function renderParties() {
 
 /** Syncs state with the API and rerenders */
 async function render() {
+  // console.log("Inside render");
   await getParties();
   renderParties();
 }
