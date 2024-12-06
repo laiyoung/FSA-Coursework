@@ -46,7 +46,7 @@ function getEventFromHash() {
   // We need to slice the # off
   const id = window.location.hash.slice(1);
   state.event = state.events.find((event) => event.id === +id);
-  // The + makes sure the id is treated as a number not a string
+  // The "+" on the id makes sure the id is treated as a number not a string
 }
 
 /**
