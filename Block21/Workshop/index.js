@@ -9,6 +9,7 @@ const state = {
 // === References ===
 const form = document.getElementById("addEvent");
 
+// === Functions ===
 /** Updates state with events from API */
 async function getParties() {
   try {
