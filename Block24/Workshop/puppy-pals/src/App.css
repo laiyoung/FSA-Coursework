@@ -3,6 +3,12 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-image: linear-gradient(to right, rgb(0, 255, 204) , yellow);
+}
+
+body {
+  margin: 20px 40px;
+  background: rgb(155, 221, 245);
 }
 
 .logo {
