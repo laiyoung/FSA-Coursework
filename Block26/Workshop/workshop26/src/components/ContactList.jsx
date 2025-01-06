@@ -1,8 +1,7 @@
 import React from "react";
-import { useState } from 'react';
+import { useState } from "react";
 import { useEffect } from "react";
 import ContactRow from "./ContactRow";
-
 
 const dummyContacts = [
   { id: 1, name: "R2-D2", phone: "222-222-2222", email: "r2d2@droids.com" },
@@ -21,14 +20,12 @@ function ContactList({ setSelectedContactId }) {
         );
         const result = await response.json();
         setContacts(result);
-        
       } catch (error) {
         console.error(error);
       }
     }
-    fetchContacts()
+    fetchContacts();
   }, []);
-  
 
   return (
     <table>
@@ -44,7 +41,13 @@ function ContactList({ setSelectedContactId }) {
           <td>Phone</td>
         </tr>
         {contacts.map((contact) => {
-          return <ContactRow key={contact.id} contact={contact} />;
+          return (
+            <ContactRow
+              setSelectedContactId={setSelectedContactId}
+              key={contact.id}
+              contact={contact}
+            />
+          );
         })}
       </tbody>
     </table>

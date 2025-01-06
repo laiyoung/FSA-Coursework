@@ -1,0 +1,23 @@
+return selectedContact ? (
+    <div>
+      <h1>{selectedContact.name}</h1>
+      <h3>Address: </h3>
+      <p>{selectedContact.address.street}</p>
+      <p>{selectedContact.address.suite}</p>
+      <p>
+        {selectedContact.address.city}, {selectedContact.address.zipcode}
+      </p>
+      <h4>Website: {selectedContact.website} </h4>
+      <button
+        onClick={() => {
+          location.reload();
+        }}
+      >
+        Back to List
+      </button>
+    </div>
+  ) : (
+    <div>Waiting for information...</div>
+  );
+  So, I checked to see if you could do this without the ternary operator. You cannot!
+  LOL I want to know why?!
