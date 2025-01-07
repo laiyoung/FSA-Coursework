@@ -39,7 +39,7 @@ function SelectedContact({ selectedContactId }) {
       </button>
     </div>
   ) : (
-    <div>Waiting for information...</div>
+    <div>An issue occured with data procurement. Please inspect the console.</div>
   );
 }
 export default SelectedContact;
