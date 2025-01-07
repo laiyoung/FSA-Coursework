@@ -37,6 +37,7 @@ function SelectedContact({ selectedContactId }) {
       >
         Back to List
       </button>
+      {/* This button's actually just refreshing the pg., not going back. */}
     </div>
   ) : (
     <div>An issue occured with data procurement. Please inspect the console.</div>
