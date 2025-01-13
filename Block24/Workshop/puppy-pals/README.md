@@ -1,6 +1,6 @@
 # React + Vite
 
-Netlify Deployment Link: https://resilient-lokum-10d81d.netlify.app/
+Netlify Deployment Link: https://6784775d0979b5149ec65f0c--incandescent-duckanoo-8dc2d5.netlify.app/
 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
