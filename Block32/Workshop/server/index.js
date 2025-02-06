@@ -7,10 +7,15 @@ const client = new pg.Client(
 const app = express();
 const path = require("path");
 
+// Parser for the JSON text:
+app.use(express.json());
+// Middleware for printing information + errors:
+app.use(require('morgan')('dev'));
+
 // Static routes here (you only need these for deployment + front end):
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-// All app routes here: 
+// All app routes here:
 
 // Get all flavors
 app.get("/api/flavors", async (req, res, next) => {
@@ -21,27 +26,72 @@ app.get("/api/flavors", async (req, res, next) => {
     const response = await client.query(SQL);
     res.send(response.rows);
   } catch (ex) {
-    next();
+    next(ex);
   }
 });
 
-// Get 1 flavor by id 
+// Get 1 flavor by id
 app.get("/api/flavors/:id", async (req, res, next) => {
   try {
     const SQL = `
-            SELECT * FROM flavors WHERE id = $1
+            SELECT * FROM flavors 
+            WHERE id = $1
             `;
     const response = await client.query(SQL, [req.params.id]);
     res.send(response.rows);
   } catch (ex) {
-    next();
+    next(ex);
   }
 });
 
 //Add a flavor
+app.post("/api/flavors", async (req, res, next) => {
+  try {
+    console.log(req.body)
+    const SQL = `
+              INSERT INTO flavors(name)
+              VALUES($1)
+              RETURNING *
+              `;
+    const response = await client.query(SQL, [req.body.name]);
+    res.send(response.rows[0]);
+  } catch (ex) {
+    next(ex);
+  }
+});
 
+// Change a flavors details
+app.put("/api/flavors/:id", async (req, res, next) => {
+  try {
+    const SQL = `
+        UPDATE flavors
+        SET name = $1, is_favorite = $2, updated_at = now()
+        WHERE id = $3 
+        RETURNING *
+      `;
+    const response = await client.query(SQL, [
+      req.body.name,
+      req.body.is_favorite,
+      req.params.id,
+    ]);
+    res.send(response.rows[0]);
+  } catch (error) {
+    next(error);
+  }
+});
 // Delete a flavor
-// Change a flavor
+app.delete("/api/flavors/:id", async (req, res, next) => {
+  try {
+    const SQL = `
+        DELETE from flavors
+        WHERE id = $1
+      `;
+    const response = await client.query(SQL, [req.params.id]);
+    res.sendStatus(204);
+  } catch (ex) {
+    next();
+  }
+});
 
 // Create your init function:
 const init = async () => {
