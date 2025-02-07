@@ -1,0 +1,1 @@
+INSERT INTO flavors(name, is_favorite) VALUES('vanilla', false), ('chocolate', true), ('strawberry', false)
