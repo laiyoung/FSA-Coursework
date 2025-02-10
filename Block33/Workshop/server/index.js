@@ -77,24 +77,24 @@ app.delete("/api/employees/:id", async (req, res, next) => {
 });
 
 // Change an employee's details
-// app.put("/api/employees/:id", async (req, res, next) => {
-//   try {
-//     const SQL = `
-//         UPDATE employees
-//         SET name = $1, is_favorite = $2, updated_at = now()
-//         WHERE id = $3
-//         RETURNING *
-//       `;
-//     const response = await client.query(SQL, [
-//       req.body.name,
-//       req.body.is_favorite,
-//       req.params.id,
-//     ]);
-//     res.send(response.rows[0]);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+app.put("/api/employees/:id", async (req, res, next) => {
+  try {
+    const SQL = `
+        UPDATE employees
+        SET name = $1, department_id = (SELECT id from departments WHERE name=$2), updated_at = now()
+        WHERE id = $3
+        RETURNING *
+      `;
+    const response = await client.query(SQL, [
+      req.body.name,
+      req.body.department,
+      req.params.id,
+    ]);
+    res.send(response.rows[0]);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Create your init function:
 const init = async () => {
