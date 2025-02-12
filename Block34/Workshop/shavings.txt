@@ -1,0 +1,4 @@
+      INSERT INTO departments (name) VALUES ('accounting'), ('creative'), ('information technology'), ('human resources');
+      INSERT INTO employees (name, department_id) VALUES ('Donna', (SELECT id from departments WHERE name = 'accounting')),
+      ('Alistair', (SELECT id from departments WHERE name = 'creative')), ('Tracey', (SELECT id from departments WHERE name = 'information technology')),
+      ('Henry Russell', (SELECT id from departments WHERE name = 'human resources'))
