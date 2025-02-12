@@ -26,9 +26,10 @@ app.use(require("morgan")("dev"));
 // Static routes here (you only need these for deployment + front end):
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
+
 // All app routes here:
 
-//Add a customer
+//Add a customer (testing)
 app.post("/api/customers", async (req, res, next) => {
   try {
     console.log(req.body);
@@ -40,20 +41,32 @@ app.post("/api/customers", async (req, res, next) => {
   }
 });
 
-// Get all employees
-// app.get("/api/employees", async (req, res, next) => {
-//   try {
-//     const SQL = `
-//             SELECT * FROM employees
-//             `;
-//     const response = await client.query(SQL);
-//     res.send(response.rows);
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
+// Get all customers
+app.get("/api/customers", async (req, res, next) => {
+  try {
+    console.log(req.body);
 
-// Get all departments
+    const result = await db.fetchCustomers(req.body);
+    res.send(result);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+// Get all restaurants
+app.get("/api/restaurants", async (req, res, next) => {
+  try {
+    console.log(req.body);
+
+    const result = await db.fetchRestaurants(req.body);
+    res.send(result);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+
+// Get all reservations
 // app.get("/api/departments", async (req, res, next) => {
 //   try {
 //     const SQL = `
@@ -66,35 +79,19 @@ app.post("/api/customers", async (req, res, next) => {
 //   }
 // });
 
-// Delete an employee
-// app.delete("/api/employees/:id", async (req, res, next) => {
-//   try {
-//     const SQL = `
-//         DELETE from employees
-//         WHERE id = $1
-//       `;
-//     const response = await client.query(SQL, [req.params.id]);
-//     res.sendStatus(204);
-//   } catch (ex) {
-//     next();
-//   }
-// });
 
-// Change an employee's details
-// app.put("/api/employees/:id", async (req, res, next) => {
+// Delete a reservation
+
+
+
+
+// Add a reservation
+// app.post("/api/customers", async (req, res, next) => {
 //   try {
-//     const SQL = `
-//         UPDATE employees
-//         SET name = $1, department_id = (SELECT id from departments WHERE name=$2), updated_at = now()
-//         WHERE id = $3
-//         RETURNING *
-//       `;
-//     const response = await client.query(SQL, [
-//       req.body.name,
-//       req.body.department,
-//       req.params.id,
-//     ]);
-//     res.send(response.rows[0]);
+//     console.log(req.body);
+
+//     const result = await db.createCustomer(req.body.name);
+//     res.send(result);
 //   } catch (error) {
 //     next(error);
 //   }

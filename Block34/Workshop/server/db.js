@@ -54,6 +54,38 @@ const createReservation = async (
   return result.rows[0];
 };
 
+// Deleting a reservation data function:
+// app.delete("/api/employees/:id", async (req, res, next) => {
+//   try {
+//     const SQL = `
+//         DELETE from employees
+//         WHERE id = $1
+//       `;
+//     const response = await client.query(SQL, [req.params.id]);
+//     res.sendStatus(204);
+//   } catch (ex) {
+//     next();
+//   }
+// });
+
+// Fetching all customers function:
+const fetchCustomers = async () => {
+  const SQL = `
+  SELECT name, id FROM customers
+  `;
+  const result = await client.query(SQL);
+  return result.rows;
+};
+
+// Fetching all restaurants function:
+const fetchRestaurants = async () => {
+  const SQL = `
+  SELECT name, id FROM restaurants
+  `;
+  const result = await client.query(SQL);
+  return result.rows;
+};
+
 // Create your init function:
 const init = async () => {
   await client.connect();
@@ -95,7 +127,7 @@ const init = async () => {
     console.log("restaurant created: " + name);
   });
 
- reservation =  await createReservation("Bob", "Nobu", "2025-02-14", 2);
+  reservation = await createReservation("Bob", "Nobu", "2025-02-14", 2);
   console.log("reservation created:", reservation);
   // Requires date format of: yyyy-mm-dd
 };
@@ -106,4 +138,6 @@ module.exports = {
   createCustomer,
   createRestaurant,
   createReservation,
+  fetchCustomers,
+  fetchRestaurants,
 };
