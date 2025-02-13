@@ -34,18 +34,18 @@ const createRestaurant = async (restaurantName) => {
 };
 
 // Creating a reservation data function:
-const createReservation = async (
+const createReservation = async ({
   customerName,
   restaurantName,
   date,
-  partyCount
-) => {
+  partyCount,
+}) => {
   const SQL = ` 
-        INSERT INTO reservations(id, date, party_count, restaurant_id, customer_id) VALUES($1, $2, $3,
-         (SELECT id FROM restaurants WHERE name =$4), (SELECT id FROM customers WHERE name =$5))  
-         RETURNING *`;
+  INSERT INTO reservations(date, party_count, restaurant_id, customer_id) 
+  VALUES($1, $2,(SELECT id FROM restaurants WHERE name =$3), (SELECT id FROM customers WHERE name =$4))  
+  RETURNING *`;
+
   const result = await client.query(SQL, [
-    uuid.v4(),
     date,
     partyCount,
     restaurantName,
@@ -55,8 +55,8 @@ const createReservation = async (
 };
 
 // Deleting a reservation data function:
-const destroyReservation = async ({id, customer_id}) => {
-  console.log(id, customer_id)
+const destroyReservation = async ({ id, customer_id }) => {
+  console.log(id, customer_id);
   const SQL = `
         DELETE FROM reservations
         WHERE id = $1 and customer_id = $2
@@ -101,18 +101,20 @@ const init = async () => {
       DROP TABLE IF EXISTS customers;
       DROP TABLE IF EXISTS restaurants;
       
+      CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
       CREATE TABLE restaurants(
-      id UUID PRIMARY KEY,
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
       name VARCHAR(50) NOT NULL
       );
 
       CREATE TABLE customers(
-      id UUID PRIMARY KEY,
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
       name VARCHAR(50) NOT NULL
       );
       
       CREATE TABLE reservations(
-      id UUID PRIMARY KEY,
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
       date DATE NOT NULL,
       party_count INTEGER NOT NULL,
       restaurant_id UUID REFERENCES restaurants(id) NOT NULL,
@@ -133,10 +135,20 @@ const init = async () => {
     console.log("restaurant created: " + name);
   });
 
-  reservation1 = await createReservation("Bob", "Nobu", "2025-02-14", 2);
+  let reservation1 = await createReservation({
+    customerName: "Bob",
+    restaurantName: "Nobu",
+    date: "2025-02-14",
+    partyCount: 2,
+  });
   console.log("reservation created:", reservation1);
 
-  reservation2 = await createReservation("Janice", "Chili's", "2025-02-18", 6);
+  let reservation2 = await createReservation({
+    customerName: "Janice",
+    restaurantName: "Chili's",
+    date: "2025-02-18",
+    partyCount: 6,
+  });
   console.log("reservation created:", reservation2);
   // Requires date format of: yyyy-mm-dd
 };

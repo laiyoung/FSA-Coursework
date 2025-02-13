@@ -77,18 +77,20 @@ app.get("/api/reservations", async (req, res, next) => {
 });
 
 // Add a reservation
-app.post("/api/customers/:id/reservations", async (req, res, next) => {
+app.post("/api/customers/:customer_id/reservation", async (req, res, next) => {
+  const { customer_id } = req.params;
+  const { restaurant_id, date, party_count } = req.body;
   try {
     console.log(req.body);
 
-    await db.createReservation({
-      customer_id: req.params.customer_id,
-      restaurant_id: req.body.restaurant_id,
-      date: req.body.date,
-      party_count: req.body.party_count,
+    const reservationCreation = await db.createReservation({
+      customerName: customer_id,
+      restaurantName: restaurant_id,
+      date: date,
+      partyCount: party_count,
     });
 
-    res.sendStatus(201);
+    res.status(201).json(reservationCreation);
   } catch (error) {
     next(error);
   }
