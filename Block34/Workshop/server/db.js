@@ -13,7 +13,7 @@ const client = new pg.Client(
 
 // Creating a customer data function:
 const createCustomer = async (customerName) => {
-  console.log("db initialized");
+  // console.log("db initialized");
   const SQL = `
         INSERT INTO customers(id, name) VALUES($1, $2)
         RETURNING *
@@ -24,7 +24,7 @@ const createCustomer = async (customerName) => {
 
 // Creating a restaurant data function:
 const createRestaurant = async (restaurantName) => {
-  console.log("db initialized");
+  // console.log("db initialized");
   const SQL = `
               INSERT INTO restaurants(id, name) VALUES($1, $2)
               RETURNING *
@@ -55,18 +55,15 @@ const createReservation = async (
 };
 
 // Deleting a reservation data function:
-// app.delete("/api/employees/:id", async (req, res, next) => {
-//   try {
-//     const SQL = `
-//         DELETE from employees
-//         WHERE id = $1
-//       `;
-//     const response = await client.query(SQL, [req.params.id]);
-//     res.sendStatus(204);
-//   } catch (ex) {
-//     next();
-//   }
-// });
+const destroyReservation = async ({id, customer_id}) => {
+  console.log(id, customer_id)
+  const SQL = `
+        DELETE FROM reservations
+        WHERE id = $1 and customer_id = $2
+      `;
+
+  await client.query(SQL, [id, customer_id]);
+};
 
 // Fetching all customers function:
 const fetchCustomers = async () => {
@@ -81,6 +78,15 @@ const fetchCustomers = async () => {
 const fetchRestaurants = async () => {
   const SQL = `
   SELECT name, id FROM restaurants
+  `;
+  const result = await client.query(SQL);
+  return result.rows;
+};
+
+// Fetching all reservations function:
+const fetchReservations = async () => {
+  const SQL = `
+  SELECT id, date, party_count, restaurant_id, customer_id FROM reservations
   `;
   const result = await client.query(SQL);
   return result.rows;
@@ -127,8 +133,11 @@ const init = async () => {
     console.log("restaurant created: " + name);
   });
 
-  reservation = await createReservation("Bob", "Nobu", "2025-02-14", 2);
-  console.log("reservation created:", reservation);
+  reservation1 = await createReservation("Bob", "Nobu", "2025-02-14", 2);
+  console.log("reservation created:", reservation1);
+
+  reservation2 = await createReservation("Janice", "Chili's", "2025-02-18", 6);
+  console.log("reservation created:", reservation2);
   // Requires date format of: yyyy-mm-dd
 };
 
@@ -140,4 +149,6 @@ module.exports = {
   createReservation,
   fetchCustomers,
   fetchRestaurants,
+  fetchReservations,
+  destroyReservation,
 };

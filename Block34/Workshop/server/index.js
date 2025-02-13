@@ -26,7 +26,6 @@ app.use(require("morgan")("dev"));
 // Static routes here (you only need these for deployment + front end):
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-
 // All app routes here:
 
 //Add a customer (testing)
@@ -65,34 +64,50 @@ app.get("/api/restaurants", async (req, res, next) => {
   }
 });
 
-
 // Get all reservations
-// app.get("/api/departments", async (req, res, next) => {
-//   try {
-//     const SQL = `
-//             SELECT * FROM departments
-//             `;
-//     const response = await client.query(SQL);
-//     res.send(response.rows);
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
+app.get("/api/reservations", async (req, res, next) => {
+  try {
+    console.log(req.body);
 
-
-// Delete a reservation
-
-
-
+    const result = await db.fetchReservations(req.body);
+    res.send(result);
+  } catch (ex) {
+    next(ex);
+  }
+});
 
 // Add a reservation
-// app.post("/api/customers", async (req, res, next) => {
-//   try {
-//     console.log(req.body);
+app.post("/api/customers/:id/reservations", async (req, res, next) => {
+  try {
+    console.log(req.body);
 
-//     const result = await db.createCustomer(req.body.name);
-//     res.send(result);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+    await db.createReservation({
+      customer_id: req.params.customer_id,
+      restaurant_id: req.body.restaurant_id,
+      date: req.body.date,
+      party_count: req.body.party_count,
+    });
+
+    res.sendStatus(201);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Delete a reservation
+app.delete(
+  "/api/customers/:customer_id/reservations/:id",
+  async (req, res, next) => {
+    try {
+      console.log(req.body);
+
+      await db.destroyReservation({
+        id: req.params.id,
+        customer_id: req.params.customer_id,
+      });
+      res.sendStatus(204);
+    } catch (ex) {
+      next(ex);
+    }
+  }
+);
