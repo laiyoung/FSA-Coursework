@@ -16,47 +16,35 @@ const client = new pg.Client(
 
 // Creating a user data function:
 const createUser = async (username, password) => {
-    const SQL = `
+  const SQL = `
           INSERT INTO users(username, password) 
           VALUES($1, $2)
           RETURNING *
           `;
-          const hashedPassword = await bcrypt.hash(password, 5);
-    const result = await client.query(SQL, [username, hashedPassword ]);
-    return result.rows[0];
+  const hashedPassword = await bcrypt.hash(password, 5);
+  const result = await client.query(SQL, [username, hashedPassword]);
+  return result.rows[0];
 };
 
 // Creating a product data function:
-const createProduct = async (productName) => {
-  //   // console.log("db initialized");
-  //   const SQL = `
-  //               INSERT INTO restaurants(id, name) VALUES($1, $2)
-  //               RETURNING *
-  //               `;
-  //   const result = await client.query(SQL, [uuid.v4(), restaurantName]);
-  //   return result.rows[0];
+const createProduct = async (name) => {
+  // console.log("db initialized");
+  const SQL = `
+                INSERT INTO products(name) VALUES($1)
+                RETURNING *
+                `;
+  const result = await client.query(SQL, [name]);
+  return result.rows[0];
 };
 
 // Creating a favorite data function:
-const createFavorite = async (
-  {
-    //   customerName,
-    //   restaurantName,
-    //   date,
-    //   partyCount,
-  }
-) => {
-  //   const SQL = `
-  //   INSERT INTO reservations(date, party_count, restaurant_id, customer_id)
-  //   VALUES($1, $2,(SELECT id FROM restaurants WHERE name =$3), (SELECT id FROM customers WHERE name =$4))
-  //   RETURNING *`;
-  //   const result = await client.query(SQL, [
-  //     date,
-  //     partyCount,
-  //     restaurantName,
-  //     customerName,
-  //   ]);
-  //   return result.rows[0];
+const createFavorite = async ({ username, productName }) => {
+  const SQL = `
+    INSERT INTO favorites(user_id, product_id)
+    VALUES((SELECT id FROM users WHERE username =$1), (SELECT id FROM products WHERE name =$2))
+    RETURNING *`;
+  const result = await client.query(SQL, [username, productName]);
+  return result.rows[0];
 };
 
 // Deleting a favorite data function:
@@ -71,29 +59,30 @@ const destroyFavorite = async ({ id, customer_id }) => {
 
 // Fetching all users function:
 const fetchUsers = async () => {
-    const SQL = `
+  const SQL = `
     SELECT * FROM users
     `;
-    const result = await client.query(SQL);
-    return result.rows;
+  const result = await client.query(SQL);
+  return result.rows;
 };
 
 // Fetching all products function:
 const fetchProducts = async () => {
-  //   const SQL = `
-  //   SELECT name, id FROM restaurants
-  //   `;
-  //   const result = await client.query(SQL);
-  //   return result.rows;
+  const SQL = `
+    SELECT * FROM products
+    `;
+  const result = await client.query(SQL);
+  return result.rows;
 };
 
 // Fetching all favorites for a user function:
-const fetchFavorites = async () => {
-  //   const SQL = `
-  //   SELECT id, date, party_count, restaurant_id, customer_id FROM reservations
-  //   `;
-  //   const result = await client.query(SQL);
-  //   return result.rows;
+const fetchFavorites = async (user_id) => {
+    const SQL = `
+    SELECT * FROM favorites
+    WHERE user_id = $1
+    `;
+    const result = await client.query(SQL, [user_id]);
+    return result.rows;
 };
 
 // Function to create tables (this will NOT be exported to index):
@@ -134,35 +123,37 @@ const init = async () => {
 
   await client.connect();
   await creatTables();
-  await createUser("smilingJoe","password");
+  await createUser("sleepyJoe", "password");
   await createUser("frowningFrank", "password");
-  console.table(await fetchUsers())
+  await createUser("madMarge", "password");
+  console.table(await fetchUsers());
 
-  // ["Bob", "Janice", "Jerry"].forEach(async (name) => {
-  //   await createCustomer(name);
-  //   console.log("customer created: " + name);
-  // });
+  [
+    "Fresh Brush Toothbrush",
+    "Lavender Milk Bath Salts",
+    "Peony Face Oil",
+  ].forEach(async (productName) => {
+    await createProduct(productName);
+    console.log("product created: " + productName);
+  });
 
-  // ["Nobu", "76", "Chili's"].forEach(async (name) => {
-  //   await createRestaurant(name);
-  //   console.log("restaurant created: " + name);
-  // });
+  let favorite1 = await createFavorite({
+    username: "sleepyJoe",
+    productName: "Lavender Milk Bath Salts",
+  });
+  console.log("favorite created:", favorite1);
 
-  // let reservation1 = await createReservation({
-  //   customerName: "Bob",
-  //   restaurantName: "Nobu",
-  //   date: "2025-02-14",
-  //   partyCount: 2,
-  // });
-  // console.log("reservation created:", reservation1);
+  let favorite2 = await createFavorite({
+    username: "madMarge",
+    productName: "Peony Face Oil",
+  });
+  console.log("favorite created:", favorite2);
 
-  // let reservation2 = await createReservation({
-  //   customerName: "Janice",
-  //   restaurantName: "Chili's",
-  //   date: "2025-02-18",
-  //   partyCount: 6,
-  // });
-  // console.log("reservation created:", reservation2);
+  let favorite3 = await createFavorite({
+    username: "madMarge",
+    productName: "Fresh Brush Toothbrush",
+  });
+  console.log("favorite created:", favorite3);
 };
 
 //Allowing the init function to be exported:

@@ -44,7 +44,6 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 // Get all users
 app.get("/api/users", async (req, res, next) => {
   try {
-    console.log(req.body);
 
     const result = await db.fetchUsers(req.body);
     res.send(result);
@@ -54,28 +53,27 @@ app.get("/api/users", async (req, res, next) => {
 });
 
 // Get all products
-// app.get("/api/restaurants", async (req, res, next) => {
-//   try {
-//     console.log(req.body);
+app.get("/api/products", async (req, res, next) => {
+  try {
+    console.log(req.body);
 
-//     const result = await db.fetchRestaurants(req.body);
-//     res.send(result);
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
+    const result = await db.fetchProducts(req.body);
+    res.send(result);
+  } catch (ex) {
+    next(ex);
+  }
+});
 
 // Get all favorites for a user
-// app.get("/api/reservations", async (req, res, next) => {
-//   try {
-//     console.log(req.body);
-
-//     const result = await db.fetchReservations(req.body);
-//     res.send(result);
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
+app.get("/api/users/:user_id/favorites", async (req, res, next) => {
+  try {
+    
+    const result = await db.fetchFavorites(req.params.user_id);
+    res.send(result);
+  } catch (ex) {
+    next(ex);
+  }
+});
 
 // Add a favorite for a user
 // app.post("/api/customers/:customer_id/reservation", async (req, res, next) => {
