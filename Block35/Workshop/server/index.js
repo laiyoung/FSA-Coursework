@@ -27,6 +27,7 @@ app.use(require("morgan")("dev"));
 // Static routes here (you only need these for deployment + front end):
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
+
 // All app routes here:
 
 // Get all users

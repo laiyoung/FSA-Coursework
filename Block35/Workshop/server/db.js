@@ -1,4 +1,4 @@
-/** Holding the data layer for SQL interactions (Postgres Connection) */
+/** Holding the "data layer" for SQL interactions (Postgres Connection) */
 
 // Imports here for pg:
 const pg = require("pg");
@@ -6,7 +6,7 @@ const pg = require("pg");
 // Adding UUID generation capability:
 const uuid = require("uuid");
 
-// Adding UUI generation capability:
+// Adding hashing generation capability:
 const bcrypt = require("bcrypt");
 
 // Client set up:
@@ -84,7 +84,7 @@ const fetchFavorites = async (user_id) => {
   return result.rows;
 };
 
-// Function to create tables (this will NOT be exported to index):
+// Function to create tables (this will NOT be exported to index.js):
 const creatTables = async () => {
   const SQL = `
       DROP TABLE IF EXISTS favorites;
