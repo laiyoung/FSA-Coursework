@@ -78,7 +78,6 @@ app.get("/api/reservations", async (req, res, next) => {
 
 // Add a reservation
 app.post("/api/customers/:customer_id/reservation", async (req, res, next) => {
-  const { customer_id } = req.params;
   const {  restaurantName, date, partyCount, customerName } = req.body;
   try {
     console.log(req.body);

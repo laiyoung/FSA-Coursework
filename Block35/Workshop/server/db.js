@@ -48,13 +48,12 @@ const createFavorite = async ({ username, productName }) => {
 };
 
 // Deleting a favorite data function:
-const destroyFavorite = async ({ id, customer_id }) => {
-  //   console.log(id, customer_id);
-  //   const SQL = `
-  //         DELETE FROM reservations
-  //         WHERE id = $1 and customer_id = $2
-  //       `;
-  //   await client.query(SQL, [id, customer_id]);
+const destroyFavorite = async ({ user_id, id }) => {
+  const SQL = `
+          DELETE FROM favorites
+          WHERE user_id = $1 and id = $2
+        `;
+  await client.query(SQL, [user_id, id]);
 };
 
 // Fetching all users function:
@@ -77,16 +76,16 @@ const fetchProducts = async () => {
 
 // Fetching all favorites for a user function:
 const fetchFavorites = async (user_id) => {
-    const SQL = `
+  const SQL = `
     SELECT * FROM favorites
     WHERE user_id = $1
     `;
-    const result = await client.query(SQL, [user_id]);
-    return result.rows;
+  const result = await client.query(SQL, [user_id]);
+  return result.rows;
 };
 
 // Function to create tables (this will NOT be exported to index):
-const creatTables = async (params) => {
+const creatTables = async () => {
   const SQL = `
       DROP TABLE IF EXISTS favorites;
       DROP TABLE IF EXISTS users;

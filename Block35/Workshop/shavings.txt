@@ -1,1 +1,14 @@
-   SELECT id, product_id, user_id FROM favorites    
+   SELECT id, product_id, user_id FROM favorites 
+
+   //Add a user (testing)
+app.post("/api/users", async (req, res, next) => {
+  try {
+        await db.createUser({
+          username: req.body.username,
+          password: req.body.password,
+        });
+        res.sendStatus(204);
+  } catch (ex) {
+    next(ex);
+  }
+});   

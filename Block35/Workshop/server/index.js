@@ -29,22 +29,9 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // All app routes here:
 
-//Add a user (testing)
-// app.post("/api/customers", async (req, res, next) => {
-//   try {
-//     console.log(req.body);
-
-//     const result = await db.createCustomer(req.body.name);
-//     res.send(result);
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
-
 // Get all users
 app.get("/api/users", async (req, res, next) => {
   try {
-
     const result = await db.fetchUsers(req.body);
     res.send(result);
   } catch (ex) {
@@ -67,7 +54,6 @@ app.get("/api/products", async (req, res, next) => {
 // Get all favorites for a user
 app.get("/api/users/:user_id/favorites", async (req, res, next) => {
   try {
-    
     const result = await db.fetchFavorites(req.params.user_id);
     res.send(result);
   } catch (ex) {
@@ -76,39 +62,32 @@ app.get("/api/users/:user_id/favorites", async (req, res, next) => {
 });
 
 // Add a favorite for a user
-// app.post("/api/customers/:customer_id/reservation", async (req, res, next) => {
-//   const { customer_id } = req.params;
-//   const {  restaurantName, date, partyCount, customerName } = req.body;
-//   try {
-//     console.log(req.body);
+app.post("/api/users/:user_id/favorites", async (req, res, next) => {
+  try {
+    const result = await db.createFavorite({
+      username: req.body.username,
+      productName: req.body.productName,
+    });
 
-//     const reservationCreation = await db.createReservation({
-//       customerName: customerName,
-//       restaurantName: restaurantName,
-//       date: date,
-//       partyCount: partyCount,
-//     });
-
-//     res.status(201).json(reservationCreation);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Delete a favorite for a user
-// app.delete(
-//   "/api/customers/:customer_id/reservations/:id",
-//   async (req, res, next) => {
-//     try {
-//       console.log(req.body);
-
-//       await db.destroyReservation({
-//         id: req.params.id,
-//         customer_id: req.params.customer_id,
-//       });
-//       res.sendStatus(204);
-//     } catch (ex) {
-//       next(ex);
-//     }
-//   }
-// );
+app.delete(
+  "/api/users/:user_id/favorites/:id",
+  async (req, res, next) => {
+    try {
+     
+      await db.destroyFavorite({
+        user_id: req.params.user_id,
+        id: req.params.id,
+      });
+      res.sendStatus(204);
+    } catch (ex) {
+      next(ex);
+    }
+  }
+);
